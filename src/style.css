@@ -1,0 +1,69 @@
+/**
+ * ============================================================================
+ * MONTE AZUR — MAIN VITE CSS ENTRY & OFFICIAL LENIS RULES (src/style.css)
+ * ============================================================================
+ * DEVELOPMENT STAGE:
+ * - STAGE 1: FOUNDATION CODE (Official Lenis Base Styles & Modular BEM Imports)
+ * - STAGE 2: CORE FUNCTIONALITY (Scroll Container Normalization & Overflow Clip)
+ * - STAGE 3: ENHANCEMENT / ANIMATION / OPTIMIZATION (60fps Zero-Jitter Scroll Rules)
+ *
+ * WHY THIS CODE EXISTS:
+ * 1. Imports official `lenis/dist/lenis.css` and project BEM stylesheets in cascade order.
+ * 2. Enforces `height: auto; min-height: 100%; scroll-behavior: auto !important;` on
+ *    `html, body` so the root window scroll container is never trapped by `100vh` or
+ *    competing native `scroll-behavior: smooth`.
+ * 3. Uses `overflow-x: clip` on `body` only (never `overflow-x: hidden` on both `html`
+ *    and `body`) so the browser does not create a secondary scroll container.
+ *
+ * TRICKY LOGIC:
+ * - `.lenis.lenis-scrolling iframe { pointer-events: none; }` prevents embedded
+ *   maps (`#location`) from hijacking wheel events during smooth page scrolling.
+ *
+ * TODO: None - Verified 0,1,0 BEM compatibility and Lenis v1.3+ compliance.
+ * ============================================================================
+ */
+
+/* STEP 1: Import official Lenis stylesheet & modular BEM architecture */
+@import 'lenis/dist/lenis.css';
+@import '../css/style.css';
+@import '../css/animations.css';
+@import '../css/responsive.css';
+
+/* STEP 2: Add official Lenis smooth scroll & zero-jitter container rules */
+html,
+body {
+  height: auto;
+  min-height: 100%;
+  scroll-behavior: auto !important;
+}
+
+html {
+  overflow-x: visible;
+}
+
+body {
+  overflow-x: clip;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+/* STEP 5: Optimize performance by disabling iframe pointer events during active scroll */
+.lenis.lenis-smooth iframe,
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}

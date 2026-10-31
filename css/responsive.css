@@ -1,0 +1,464 @@
+/* ==========================================================================
+   STAGE 2: CORE FUNCTIONALITY — RESPONSIVE ADAPTATIONS
+   // STEP 2: Add the CSS layout and styling (Responsive Breakpoints)
+   Why this code exists:
+   Guarantees flawless viewing, fluid typography, touch accessibility (min 44px
+   targets), and zero horizontal overflow across mobile (375px), tablet (768px),
+   laptop (1024px), and ultra-wide screens (1440px+).
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. TABLET & SMALL LAPTOPS (Max-Width: 1024px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  :root {
+    --header-height: 76px;
+    --space-4xl: 4.5rem;
+    --space-3xl: 3.5rem;
+  }
+
+  /* Navigation: Hide Desktop Menu, Show Mobile Hamburger */
+  .site-header__nav {
+    display: none;
+  }
+
+  .site-header__btn {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  /*STAGE 2: CORE FUNCTIONALITY — PINNED SPACES DECK ON TABLET & MOBILE
+    // STEP 2: Add the CSS layout and styling
+    Why this code exists:
+    Keeps .spaces-section as a 100vh pinned viewport on tablet and mobile so the
+    user can scroll/toss through the stacked .space-card and .space-card__img deck
+    instead of falling back to a long unpinned vertical column.
+    Tricky logic:
+    Uses a 2-row grid (auto intro row + 1fr card deck row) inside 100svh/100dvh
+    while preserving position: absolute; inset: 0 on .space-card for 3D stacking.
+    TODO: Maintain flat BEM selectors (0,1,0 specificity limit). */
+  .spaces-section__container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    gap: var(--space-md);
+    padding: calc(var(--header-height) + var(--space-xs)) var(--space-lg) var(--space-lg);
+    min-height: 100vh;
+    height: 100vh;
+    height: 100svh;
+    align-items: center;
+  }
+
+  .spaces-section__col--intro {
+    padding-right: 0;
+    margin-bottom: 0;
+    height: auto;
+    justify-content: flex-start;
+  }
+
+  .spaces-intro {
+    max-width: 100%;
+  }
+
+  .spaces-intro__deck {
+    min-height: 140px;
+  }
+
+  .spaces-intro__progress {
+    margin-top: var(--space-sm);
+  }
+
+  .spaces-section__col--deck {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .spaces-deck {
+    position: relative;
+    width: 100%;
+    max-width: 40rem;
+    height: 100%;
+    max-height: 54vh;
+  }
+
+  .spaces-deck .space-card {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 18px;
+    margin-bottom: 0;
+  }
+
+  /* Recognition Ribbon: Wrap into Structured Grid */
+  .awards-ribbon__container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-lg);
+  }
+
+  .awards-ribbon__header {
+    max-width: 100%;
+  }
+
+  .awards-ribbon__grid {
+    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+
+  /* About Section Grid: Stack into Column on Tablet / Mobile */
+  .property-about__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .property-about__visuals {
+    order: -1;
+    margin-right: 0;
+    width: 100%;
+    min-height: 380px;
+    height: 50vh;
+  }
+
+  .property-about__figure {
+    border-radius: var(--radius-md);
+  }
+
+  /* Experience Chapters: Stack Alternating Columns */
+  .experience-card,
+  .experience-card--right {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+
+    .experience-card__media {
+      order: 1 !important;
+    }
+
+    .experience-card__content {
+      order: 2 !important;
+    }
+  }
+
+  /* Amenities Grid: 2 Columns */
+  .amenities-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Reviews Grid: Stack on Tablet */
+  .reviews-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  /* Booking Layout: Stack Calendar over Summary */
+  .booking-layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  /* Location Grid: Stack Column */
+  .location-guide__grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Footer: 2-Column Grid */
+  .site-footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. MOBILE PHONES (Max-Width: 768px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  :root {
+    --header-height: 68px;
+    --space-4xl: 3.5rem;
+    --space-2xl: 2rem;
+  }
+
+  /*STAGE 2: CORE FUNCTIONALITY — MOBILE CENTERED HERO & SECTION HEADERS
+    // STEP 2: Add the CSS layout and styling (Mobile Breakpoint)
+    Why this code exists:
+    Centers `.hero-banner__editorial-content` (including its container, subline,
+    description, and CTA buttons) and all `.section-header` blocks in mobile view
+    for balanced single-column editorial composition.
+    Tricky logic:
+    Overrides desktop `text-align: left`, `justify-content: flex-start`, and
+    `margin-left: 0` on `.hero-banner__editorial-desc` and `.hero-banner__actions`
+    using flat BEM selectors.
+    TODO: Maintain flat BEM selectors (0,1,0 specificity limit). */
+  .section-header {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-banner__container--editorial {
+    justify-content: center;
+  }
+
+  .hero-banner__editorial-content {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Hero Center Typography */
+  .hero-banner__editorial-title {
+    font-size: clamp(2.6rem, 11vw, 3.85rem);
+    line-height: 1.08;
+    letter-spacing: 0.01em;
+    margin-bottom: var(--space-xs);
+    text-align: center;
+  }
+
+  .hero-banner__editorial-desc {
+    font-size: var(--text-sm);
+    margin-top: var(--space-md);
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .hero-banner__actions {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-banner__actions .btn {
+    width: 100%;
+  }
+
+  /* STAGE 2: CORE FUNCTIONALITY — Mobile Centered Hero Scroll Indicator
+     // STEP 2: Add the CSS layout and styling
+     Why this code exists:
+     Guarantees the "EXPLORE" scroll indicator is horizontally centered in the
+     viewport on all mobile screens without relying on CSS transform offsets that
+     can conflict with GSAP vertical scrub tweens.
+     Tricky logic:
+     Uses `left: 0; right: 0; margin-inline: auto; width: fit-content;` and offsets
+     trailing letter-spacing with `text-indent: 0.22em` for true optical centering.
+     TODO: Maintain flat BEM selectors (0,1,0 specificity limit). */
+  .hero-banner__scroll {
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    width: -moz-fit-content;
+    width: fit-content;
+    bottom: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 2;
+  }
+
+  .hero-banner__scroll-text {
+    text-indent: 0.22em;
+    text-align: center;
+  }
+
+  .booking-dates-preview {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-xs);
+  }
+
+  .booking-dates-preview__divider {
+    transform: rotate(90deg);
+    margin: 4px auto;
+  }
+
+  .hero-banner__subline {
+    justify-content: center;
+    gap: var(--space-xs);
+  }
+
+  .hero-banner__subline-dash {
+    width: 20px;
+  }
+
+  .hero-banner__subline-text {
+    font-size: 0.5625rem;
+    letter-spacing: 0.18em;
+  }
+
+  /* Spaces Section on Mobile: Pinned Full-Viewport Card Toss Layout */
+  .spaces-section__container {
+    padding: calc(var(--header-height) + 0.25rem) var(--space-md) var(--space-md);
+    gap: var(--space-sm);
+    min-height: 100vh;
+    height: 100vh;
+    height: 100svh;
+  }
+
+  .spaces-intro__meta {
+    margin-bottom: var(--space-2xs);
+  }
+
+  .spaces-intro__deck {
+    min-height: 116px;
+  }
+
+  .spaces-intro__title {
+    font-size: clamp(1.75rem, 6.5vw, 2.2rem);
+    margin-bottom: var(--space-2xs);
+  }
+
+  .spaces-intro__text {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .spaces-intro__progress {
+    margin-top: var(--space-xs);
+  }
+
+  .spaces-deck {
+    height: 100%;
+    max-height: 52vh;
+    touch-action: pan-y;
+  }
+
+  .spaces-deck .space-card {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 18px;
+    margin-bottom: 0;
+  }
+
+  /* Awards Ribbon: 2 Columns on Mobile */
+  .awards-ribbon__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+
+  .award-item {
+    border-left: none;
+    align-items: flex-start;
+    text-align: left;
+    padding: 0;
+  }
+
+  /* Tour Transitional Spacer: Mobile Height */
+  .tour-spacer {
+    min-height: 200px;
+  }
+
+  /* Amenities Grid: 1 Column */
+  .amenities-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  /* Calendar Card Padding Adjustment */
+  .booking-calendar-card,
+  .booking-summary-card {
+    padding: var(--space-lg);
+  }
+
+  .calendar-day {
+    font-size: var(--text-xs);
+  }
+
+  .calendar-controls__heading {
+    font-size: var(--text-md);
+  }
+
+  /* Form Rows in Booking Modal */
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-xs);
+  }
+
+  /* Footer Bottom Links */
+  .site-footer__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .site-footer__bottom {
+    flex-direction: column;
+    gap: var(--space-md);
+    text-align: center;
+  }
+
+  .site-footer__legal-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* Floating Pill on Mobile */
+  .floating-widget {
+    bottom: 1.25rem;
+    left: 1.25rem
+  }
+
+    .floating-widget__pill {
+      padding: 0.7rem 1.25rem;
+      font-size: 0.75rem;
+    }
+
+  /* Lightbox Navigation on Mobile */
+  .lightbox-modal__nav {
+    width: 40px;
+    height: 40px
+  }
+    .lightbox-modal__nav--next { right: 5px; }
+
+    .lightbox-modal__nav--prev { left: 5px; }
+
+  .lightbox-modal__close {
+    top: 10px;
+    right: 10px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. SMALL MOBILE SCREENS (Max-Width: 420px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 420px) {
+  .hero-banner__scroll {
+    bottom: var(--space-md);
+  }
+
+  .property-about__specs {
+    grid-template-columns: 1fr;
+  }
+
+  .calendar-weekdays span {
+    font-size: 0.65rem;
+  }
+
+  .awards-ribbon__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. ULTRA-WIDE SCREENS (Min-Width: 1600px)
+   -------------------------------------------------------------------------- */
+@media (min-width: 1600px) {
+  :root {
+    --container-max: 1540px;
+    --text-editorial-hero: 8.5rem;
+  }
+}

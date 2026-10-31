@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 72" width="360" height="72" fill="none" aria-label="Monte Azur Logo">
+  <!--
+    MONTE AZUR — LUXURY ARCHITECTURAL BRAND LOGO
+    Concept: Seaside escarpment peak ('Monte') meeting the ocean horizon arch ('Azur')
+    Color Palette: Brushed Champagne Gold (#D4AF37) & Warm Travertine White (#F4EFE6)
+  -->
+  <defs>
+    <!-- Gold luxury gradient for emblem and wordmark accent -->
+    <linearGradient id="azurGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E5C76B" />
+      <stop offset="50%" stop-color="#D4AF37" />
+      <stop offset="100%" stop-color="#997A1E" />
+    </linearGradient>
+
+    <linearGradient id="azurSilverStone" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#DCD6CC" />
+    </linearGradient>
+
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- ==================== EMBLEM (Left: 60x60 footprint) ==================== -->
+  <g transform="translate(6, 6)">
+    <!-- Outer Octagonal / Architectural Diamond Boundary -->
+    <path d="M30 2 L58 30 L30 58 L2 30 Z" 
+          stroke="url(#azurGoldGrad)" 
+          stroke-width="1.2" 
+          stroke-opacity="0.45" 
+          stroke-dasharray="1 2" 
+          fill="none" />
+
+    <!-- Mountain / Coastal Escarpment Silhouette ('Monte') -->
+    <path d="M12 40 L30 14 L48 40" 
+          stroke="url(#azurGoldGrad)" 
+          stroke-width="2" 
+          stroke-linecap="round" 
+          stroke-linejoin="round" 
+          fill="none" />
+
+    <!-- Pavilion Ridge & Central Solstice Needle -->
+    <line x1="30" y1="10" x2="30" y2="44" 
+          stroke="url(#azurGoldGrad)" 
+          stroke-width="1.5" 
+          stroke-linecap="round" />
+
+    <!-- Ocean Horizon Arc ('Azur') -->
+    <path d="M14 36 C20 44, 40 44, 46 36" 
+          stroke="url(#azurSilverStone)" 
+          stroke-width="1.6" 
+          stroke-linecap="round" 
+          stroke-opacity="0.9" 
+          fill="none" />
+
+    <!-- Calm Waterline Mirror Line -->
+    <line x1="20" y1="46" x2="40" y2="46" 
+          stroke="url(#azurGoldGrad)" 
+          stroke-width="1.2" 
+          stroke-opacity="0.75" 
+          stroke-linecap="round" />
+
+    <!-- Radiant Horizon Star / Sun Point -->
+    <circle cx="30" cy="27" r="1.75" fill="#FFFFFF" />
+  </g>
+
+  <!-- ==================== VERTICAL HAIRLINE DIVIDER ==================== -->
+  <line x1="78" y1="18" x2="78" y2="54" 
+        stroke="url(#azurGoldGrad)" 
+        stroke-width="1" 
+        stroke-opacity="0.3" />
+
+  <!-- ==================== EDITORIAL TYPOGRAPHY ==================== -->
+  <!-- Primary Wordmark -->
+  <text x="96" y="37" 
+        font-family="'Cormorant Garamond', 'Playfair Display', Georgia, serif" 
+        font-size="22" 
+        font-weight="500" 
+        letter-spacing="0.22em" 
+        fill="url(#azurGoldGrad)">
+    MONTE AZUR
+  </text>
+
+  <!-- Architectural Sub-brand Tagline -->
+  <text x="97" y="52" 
+        font-family="'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif" 
+        font-size="7.5" 
+        font-weight="400" 
+        letter-spacing="0.36em" 
+        fill="#C8C2B8" 
+        fill-opacity="0.85">
+    ESTATE &amp; COASTAL SANCTUARY
+  </text>
+</svg>

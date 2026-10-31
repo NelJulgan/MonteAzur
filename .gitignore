@@ -1,0 +1,173 @@
+# ============================================================================
+# MONTE AZUR STAYCATION — PRODUCTION-GRADE ROOT .GITIGNORE
+# Stack: Vite, TypeScript, Node.js, Express/Fastify, PostgreSQL, Redis, Docker
+# Multi-OS Team: macOS, Windows, Linux
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# 1st — FOUNDATION: SECURITY & SECRETS (CRITICAL DEFENSE LAYER)
+# ----------------------------------------------------------------------------
+# Why this exists: Prevent accidental exposure of credentials, private keys,
+# API secrets, and cloud configurations to public/private Git repositories.
+
+# Environment configuration files
+.env
+.env.*
+*.env
+**/.env
+**/.env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Whitelist safe template files (Tricky logic: Git negation '!' must follow ignore rules)
+!.env.example
+!.env.*.example
+!.env.template
+
+# Private keys, certificates, and cryptographic tokens
+*.pem
+*.key
+*.cert
+*.crt
+*.pfx
+*.p12
+*.cer
+*.ca-bundle
+*.id_rsa
+*.id_ed25519
+*.id_ecdsa
+id_rsa
+id_ed25519
+id_ecdsa
+
+# Sensitive credentials & service account tokens
+*secret*
+*credential*
+*.keystore
+service-account*.json
+google-service-account*.json
+firebase-adminsdk*.json
+
+# Cloud provider & cluster authentication caches
+.aws/
+.azure/
+.kube/
+.docker/config.json
+
+# Package manager auth tokens (Avoid committing local auth tokens)
+.npmrc
+.yarnrc
+.netrc
+# TODO: If project-wide registry settings are needed in .npmrc, commit a separate .npmrc.template
+
+# ----------------------------------------------------------------------------
+# 2nd — CORE FUNCTIONALITY: DEPENDENCIES & BUILD ARTIFACTS
+# ----------------------------------------------------------------------------
+# Why this exists: Prevent committing thousands of third-party package files,
+# compiled artifacts, and bundles that bloat repository history and cause merge conflicts.
+
+# Package dependencies
+node_modules/
+**/node_modules/
+.pnp
+.pnp.js
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+
+# Compilation and distribution bundles
+dist/
+**/dist/
+build/
+**/build/
+out/
+.next/
+*.tsbuildinfo
+
+# Tooling and runtime caches
+.cache/
+**/.cache/
+.parcel-cache/
+.turbo/
+.eslintcache
+.stylelintcache
+
+# Runtime logs, diagnostics, and process trackers
+*.log
+**/*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.pid
+*.seed
+*.pid.lock
+
+# Test coverage & diagnostics reports
+coverage/
+**/.nyc_output/
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# ----------------------------------------------------------------------------
+# 3rd — ENHANCEMENT & OPTIMIZATION: STORAGE, CLOUD, IDE & MULTI-OS
+# ----------------------------------------------------------------------------
+# Why this exists: Keep local state, developer-specific IDE configs, and OS noise
+# clean across cross-platform developer teams (macOS, Windows, Linux).
+
+# Local databases, storage, and persistence volumes
+*.sqlite
+*.sqlite-journal
+*.sqlite3
+*.db
+*.db-journal
+*.dump
+*.sql.gz
+postgres-data/
+redis-data/
+pgdata/
+
+# Docker local overrides
+docker-compose.override.yml
+docker-compose.local.yml
+
+# Terraform & Cloud IaC state
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+
+# macOS system metadata
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows system metadata
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# Linux temporary files
+*~
+.fuse_hidden*
+.directory
+
+# IDE & Editor configurations
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# VS Code (Ignore developer-specific workbench state while allowing shared team extensions)
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json

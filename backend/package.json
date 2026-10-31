@@ -1,0 +1,44 @@
+{
+  "name": "monte-azur-backend",
+  "version": "1.0.0",
+  "description": "Enterprise Fastify + TypeScript + Drizzle ORM booking backend for Monte Azur",
+  "type": "module",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "db:seed": "tsx src/db/seed.ts",
+    "worker": "tsx src/services/worker.ts",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate"
+  },
+  "dependencies": {
+    "@fastify/cors": "^8.5.0",
+    "@fastify/helmet": "^11.1.1",
+    "@fastify/rate-limit": "^8.0.3",
+    "bullmq": "^5.8.5",
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.33.0",
+    "fastify": "^4.28.1",
+    "fastify-raw-body": "^4.3.0",
+    "googleapis": "^188.0.0",
+    "ical-generator": "^11.1.2",
+    "ioredis": "^5.4.1",
+    "node-cron": "^4.6.0",
+    "node-ical": "^0.27.3",
+    "pg": "^8.12.0",
+    "resend": "^3.4.0",
+    "stripe": "^16.2.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/ioredis": "^5.0.0",
+    "@types/node": "^20.14.9",
+    "@types/node-cron": "^3.0.11",
+    "@types/pg": "^8.11.6",
+    "drizzle-kit": "^0.24.2",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.4"
+  }
+}

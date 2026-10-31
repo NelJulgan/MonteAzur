@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservation Confirmed — Monte Azur Sanctuary</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+
+  <style>
+    /* ==========================================================================
+       DEVELOPMENT STAGE:
+       - STAGE 1: FOUNDATION CODE (CSS Custom Properties & Reset)
+       - STAGE 2: CORE FUNCTIONALITY (BEM Component Layout & Glassmorphic Card)
+       - STAGE 3: ENHANCEMENT / ANIMATION / OPTIMIZATION (SVG Draw Animation)
+
+       WHY THIS STYLING EXISTS:
+       Provides a tranquil, high-end post-checkout confirmation interface matching
+       Monte Azur's signature emerald-noir and warm champagne gold visual identity.
+       ========================================================================== */
+
+    /* STEP 1: CSS Variables & Foundation Reset */
+    :root {
+      --color-bg: #0b0f0e;
+      --color-surface: #111715;
+      --color-surface-translucent: rgba(17, 23, 21, 0.85);
+      --color-gold: #d4af37;
+      --color-gold-light: #f3e5ab;
+      --color-gold-glow: rgba(212, 175, 55, 0.15);
+      --color-text-primary: #f4efe6;
+      --color-text-secondary: #a3a19b;
+      --color-border: rgba(212, 175, 55, 0.22);
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text-primary);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 16px;
+      line-height: 1.6;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.08) 0%, transparent 65%),
+        radial-gradient(circle at 100% 100%, rgba(16, 32, 26, 0.4) 0%, transparent 50%);
+    }
+
+    /* STEP 2: BEM Component Styles with Flat Selectors & Native Nesting */
+    .success-view {
+      width: 100%;
+      max-width: 640px;
+      margin: 0 auto;
+
+      &__card {
+        background: var(--color-surface-translucent);
+        border: 1px solid var(--color-border);
+        border-radius: 12px;
+        padding: 48px 36px;
+        text-align: center;
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 40px var(--color-gold-glow);
+        position: relative;
+        overflow: hidden;
+      }
+
+      &__card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+      }
+
+      &__badge {
+        display: inline-block;
+        font-size: 11px;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--color-gold);
+        margin-bottom: 24px;
+        font-weight: 600;
+      }
+
+      &__icon-wrap {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 28px auto;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      &__icon-circle {
+        stroke-dasharray: 260;
+        stroke-dashoffset: 260;
+        animation: circleDraw 0.9s var(--ease-smooth) forwards;
+      }
+
+      &__icon-check {
+        stroke-dasharray: 60;
+        stroke-dashoffset: 60;
+        animation: checkDraw 0.6s var(--ease-smooth) 0.6s forwards;
+      }
+
+      &__title {
+        font-family: var(--font-serif);
+        font-size: clamp(32px, 5vw, 42px);
+        font-weight: 400;
+        letter-spacing: 0.04em;
+        color: var(--color-text-primary);
+        margin-bottom: 12px;
+      }
+
+      &__subtitle {
+        font-size: 15px;
+        color: var(--color-text-secondary);
+        max-width: 460px;
+        margin: 0 auto 36px auto;
+        font-weight: 300;
+      }
+
+      &__details {
+        background: rgba(11, 15, 14, 0.7);
+        border: 1px solid rgba(212, 175, 55, 0.16);
+        border-radius: 8px;
+        padding: 24px;
+        margin-bottom: 32px;
+        text-align: left;
+      }
+
+      &__detail-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+        &:last-child {
+          border-bottom: none;
+          padding-bottom: 0;
+        }
+
+        &:first-child {
+          padding-top: 0;
+        }
+      }
+
+      &__detail-label {
+        font-size: 13px;
+        color: var(--color-text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      &__detail-value {
+        font-size: 14px;
+        color: var(--color-text-primary);
+        font-weight: 500;
+        font-family: monospace;
+
+        &--highlight {
+          color: var(--color-gold);
+          font-weight: 600;
+          font-family: var(--font-sans);
+        }
+      }
+
+      &__notice {
+        font-size: 13px;
+        color: var(--color-text-secondary);
+        line-height: 1.7;
+        margin-bottom: 36px;
+        padding: 16px;
+        background: rgba(212, 175, 55, 0.04);
+        border-radius: 6px;
+        border-left: 2px solid var(--color-gold);
+        text-align: left;
+      }
+
+      &__actions {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      &__btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 28px;
+        border-radius: 4px;
+        font-size: 13px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.3s var(--ease-smooth);
+        font-weight: 600;
+
+        &--primary {
+          background: var(--color-gold);
+          color: #0b0f0e;
+          border: 1px solid var(--color-gold);
+
+          &:hover {
+            background: var(--color-gold-light);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            transform: translateY(-2px);
+          }
+        }
+
+        &--secondary {
+          background: transparent;
+          color: var(--color-text-primary);
+          border: 1px solid var(--color-border);
+
+          &:hover {
+            border-color: var(--color-gold);
+            color: var(--color-gold);
+            background: rgba(212, 175, 55, 0.05);
+          }
+        }
+      }
+    }
+
+    /* STEP 3: SVG Stroke Keyframe Animations */
+    @keyframes circleDraw {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    @keyframes checkDraw {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .success-view__card {
+        padding: 36px 20px;
+      }
+      .success-view__actions {
+        flex-direction: column;
+      }
+      .success-view__btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- STEP 1: Create the HTML structure with BEM methodology -->
+  <main class="success-view">
+    <div class="success-view__card">
+      <span class="success-view__badge">Monte Azur Luxury Sanctuary</span>
+      
+      <!-- Animated Checkmark Icon -->
+      <div class="success-view__icon-wrap">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle class="success-view__icon-circle" cx="40" cy="40" r="36" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
+          <path class="success-view__icon-check" d="M25 41L35 51L55 29" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <h1 class="success-view__title">Reservation Confirmed</h1>
+      <p class="success-view__subtitle">
+        Your payment has been successfully secured. We have reserved your dates at the sanctuary.
+      </p>
+
+      <!-- Reservation Metadata Breakdown -->
+      <section class="success-view__details" aria-label="Reservation Summary">
+        <div class="success-view__detail-row">
+          <span class="success-view__detail-label">Status</span>
+          <span class="success-view__detail-value success-view__detail-value--highlight">Confirmed & Guaranteed</span>
+        </div>
+        <div class="success-view__detail-row">
+          <span class="success-view__detail-label">Booking Reference</span>
+          <span class="success-view__detail-value" id="ref-code">MA-AZUR</span>
+        </div>
+        <div class="success-view__detail-row">
+          <span class="success-view__detail-label">Stripe Session</span>
+          <span class="success-view__detail-value" id="session-code">Awaiting Session...</span>
+        </div>
+        <div class="success-view__detail-row">
+          <span class="success-view__detail-label">Check-In Time</span>
+          <span class="success-view__detail-value">From 3:00 PM PHT</span>
+        </div>
+        <div class="success-view__detail-row">
+          <span class="success-view__detail-label">Check-Out Time</span>
+          <span class="success-view__detail-value">Until 11:00 AM PHT</span>
+        </div>
+      </section>
+
+      <!-- House & Concierge Notice -->
+      <aside class="success-view__notice">
+        <strong>What happens next:</strong> A personalized itinerary, villa access gate code, and directions have been dispatched to your email. Our private concierge will connect with you 48 hours prior to your arrival.
+      </aside>
+
+      <!-- Action Navigation -->
+      <div class="success-view__actions">
+        <a href="/" class="success-view__btn success-view__btn--primary">Return to Villa Sanctuary</a>
+        <button type="button" class="success-view__btn success-view__btn--secondary" onclick="window.print()">Print Itinerary</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- STEP 3: Read URL Query Parameters & Hydrate UI -->
+  <script>
+    (function initSuccessPage() {
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const sessionId = urlParams.get('session_id');
+        const reference = urlParams.get('reference');
+
+        const elSession = document.getElementById('session-code');
+        const elRef = document.getElementById('ref-code');
+
+        if (sessionId) {
+          // Truncate cleanly for presentation while maintaining uniqueness
+          elSession.textContent = sessionId.length > 24 
+            ? `${sessionId.substring(0, 12)}...${sessionId.substring(sessionId.length - 8)}`
+            : sessionId;
+          elSession.setAttribute('title', sessionId);
+        } else {
+          elSession.textContent = 'Active Payment Verified';
+        }
+
+        if (reference) {
+          elRef.textContent = reference.startsWith('MA-') ? reference : `MA-${reference.replace(/^AUR-/, '').substring(0, 8).toUpperCase()}`;
+        }
+      } catch (err) {
+        console.warn('[Success] URL parsing warning:', err);
+      }
+    })();
+  </script>
+</body>
+</html>

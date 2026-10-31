@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="en" class="page-root">
+
+<head>
+  <!--
+    STAGE 1: FOUNDATION CODE
+    // STEP 1: Create the HTML structure
+    Why this code exists:
+    Provides the semantic DOM structure, architectural editorial typography,
+    and accessibility landmarks matching the reference design layout.
+  -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description"
+    content="Monte Azur: An architectural coastal retreat designed around quiet luxury, natural stone, and the Pacific horizon.">
+  <title>Monte Azur | Architectural Coastal Retreat &amp; Private Villa</title>
+
+  <!-- Google Fonts: Cormorant Garamond (High-Contrast Editorial Serif) + Plus Jakarta Sans (Clean Architectural Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Vite Modular CSS Entry (Imports style.css, animations.css, responsive.css) -->
+  <link rel="stylesheet" href="/src/style.css">
+
+  <!-- STAGE 1: FOUNDATION CODE — High-Priority WebP Preload Manifest (Loads Images Prior to Webpage Render)
+       // STEP 1: Preload critical WebP editorial photographs and tour frame_0001 on HTML parse
+       Why this code exists:
+       Instructs the browser's native C++ preload scanner to fetch all WebP photographs
+       in parallel with CSS and fonts before JavaScript finishes executing. -->
+  <link rel="preload" as="image" type="image/webp" href="/assets/images/hero-twilight-panorama.webp" fetchpriority="high">
+  <link rel="preload" as="image" type="image/webp" href="/assets/tour-sequence/frame_0001.webp" fetchpriority="high">
+  <link rel="preload" as="image" type="image/webp" href="/assets/images/space-courtyard-lounge.webp" fetchpriority="high">
+  <link rel="preload" as="image" type="image/webp" href="/assets/images/space-infinity-pool-sunset.webp">
+  <link rel="preload" as="image" type="image/webp" href="/assets/images/space-forest-glass-pavilion.webp">
+  <link rel="preload" as="image" type="image/webp" href="/assets/images/space-ocean-suite-sunrise.webp">
+  <link rel="preload" as="image" type="image/webp" href="/assets/images/space-living-pavilion-teak.webp">
+  <link rel="preload" as="image" type="image/webp" href="/assets/images/space-riverbend-sunset-terrace.webp">
+  <link rel="preload" as="image" type="image/webp" href="/assets/images/experience-gathering-dining.webp">
+  <link rel="preload" as="image" type="image/webp" href="/assets/images/amenity-bedroom-suites.webp">
+  <link rel="preload" as="image" type="image/webp" href="/assets/images/amenity-kitchen-dining.webp">
+  <link rel="preload" as="image" type="image/webp" href="/assets/images/amenity-salon-entertainment.webp">
+  <link rel="preload" as="image" type="image/webp" href="/assets/images/amenity-outdoor-grounds.webp">
+  <link rel="preload" as="image" type="image/webp" href="/assets/images/amenity-convenience-service.webp">
+
+  <!-- Instant Scroll Restoration Lock (Prevents scroll jumps on refresh before first paint) -->
+  <script>
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  </script>
+</head>
+
+<body class="site-body">
+
+  <!-- =========================================================================
+       GLOBAL PAGE TRANSITION SYSTEM (BEM: .page-transition)
+       Why: Minimalist luxury preloader with numeric percentage counter (0% -> 100%)
+       and dual split-curtains (top pulls UP, bottom pulls DOWN) to reveal hero.
+       ========================================================================= -->
+  <div class="page-transition" id="page-transition" aria-hidden="true">
+    <!-- Top & Bottom Architectural Curtains -->
+    <div class="page-transition__curtain page-transition__curtain--top" id="transition-curtain-top"></div>
+    <div class="page-transition__curtain page-transition__curtain--bottom" id="transition-curtain-bottom"></div>
+
+    <!-- Central Numeric Percentage Counter (0% -> 100%) -->
+    <div class="page-transition__counter-wrap" id="transition-counter-wrap">
+      <span class="page-transition__counter" id="transition-counter">0%</span>
+    </div>
+  </div>
+
+  <!-- ACCESSIBILITY: Skip to main content landmark for keyboard navigators -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- =========================================================================
+       SECTION A: REFINED EDITORIAL HEADER (BEM: .site-header)
+       Why: Ultra-minimalist top navigation mirroring the reference architecture.
+       ========================================================================= -->
+  <header class="site-header" id="site-header" role="banner">
+    <div class="site-header__container">
+      <a href="#hero" class="site-header__brand" aria-label="Monte Azur Home">
+        <span class="site-header__wordmark">MONTE AZUR</span>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="site-header__nav" aria-label="Primary Navigation">
+        <ul class="nav-list">
+          <li class="nav-list__item"><a href="#spaces" class="nav-list__link">Spaces</a></li>
+          <li class="nav-list__item"><a href="#about" class="nav-list__link">The Residence</a></li>
+          <li class="nav-list__item"><a href="#experience" class="nav-list__link">Experience</a></li>
+          <li class="nav-list__item"><a href="#tour" class="nav-list__link">Tour</a></li>
+          <li class="nav-list__item"><a href="#amenities" class="nav-list__link">Amenities</a></li>
+          <li class="nav-list__item"><a href="#reviews" class="nav-list__link">Reflections</a></li>
+        </ul>
+      </nav>
+
+      <!-- Action Button & Mobile Toggle -->
+      <div class="site-header__actions">
+        <a href="#booking" class="btn btn--primary btn--sm site-header__btn" aria-label="Reserve Your Stay">
+          <svg class="btn__icon btn__icon--calendar site-header__icon" width="14" height="14" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+            <line x1="16" y1="2" x2="16" y2="6" />
+            <line x1="8" y1="2" x2="8" y2="6" />
+            <line x1="3" y1="10" x2="21" y2="10" />
+          </svg>
+          <span class="btn__text">Book Now</span>
+        </a>
+        <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="mobile-drawer"
+          aria-label="Toggle navigation menu">
+          <span class="menu-toggle__line menu-toggle__line--top"></span>
+          <span class="menu-toggle__line menu-toggle__line--bottom"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Overlay & Navigation -->
+  <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true" data-lenis-prevent>
+    <div class="mobile-drawer__backdrop" id="drawer-backdrop"></div>
+    <div class="mobile-drawer__dialog" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+      <div class="mobile-drawer__header">
+        <span class="mobile-drawer__brand">MONTE AZUR</span>
+        <button type="button" class="mobile-drawer__close" id="drawer-close" aria-label="Close menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <nav class="mobile-drawer__nav">
+        <ul class="mobile-nav-list">
+          <li class="mobile-nav-list__item"><a href="#spaces" class="mobile-nav-list__link">Spaces</a></li>
+          <li class="mobile-nav-list__item"><a href="#about" class="mobile-nav-list__link">The Residence</a></li>
+          <li class="mobile-nav-list__item"><a href="#experience" class="mobile-nav-list__link">Experience</a></li>
+          <li class="mobile-nav-list__item"><a href="#tour" class="mobile-nav-list__link">Cinematic Tour</a></li>
+          <li class="mobile-nav-list__item"><a href="#amenities" class="mobile-nav-list__link">Amenities</a></li>
+          <li class="mobile-nav-list__item"><a href="#reviews" class="mobile-nav-list__link">Reflections</a></li>
+        </ul>
+      </nav>
+      <div class="mobile-drawer__footer">
+        <a href="#booking" class="btn btn--primary btn--full mobile-drawer__cta">
+          <svg class="btn__icon btn__icon--calendar site-header__icon" width="16" height="16" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+            <line x1="16" y1="2" x2="16" y2="6" />
+            <line x1="8" y1="2" x2="8" y2="6" />
+            <line x1="3" y1="10" x2="21" y2="10" />
+          </svg>
+          <span class="btn__text">Book Now</span>
+        </a>
+        <p class="mobile-drawer__meta">Private Villa Residence &bull; Up to 8 Guests</p>
+      </div>
+    </div>
+  </div>
+
+  <main id="main-content" class="site-main">
+
+    <!-- =========================================================================
+         STAGE 1: FOUNDATION CODE — CINEMATIC ARCHITECTURAL HERO
+         // STEP 1: Create the HTML structure
+         Why this code exists:
+         Directly references the full-bleed dusk villa composition, massive
+         centered serif headline with overflow masking for editorial entrance reveals.
+         Tricky logic: Each headline line is isolated within a `.hero-banner__mask`
+         wrapper so GSAP can translate the inner `.hero-banner__editorial-line`
+         from yPercent: 120 to 0 without clipping sibling containers or leaking into layout.
+         TODO: None - Strict BEM structure maintained.
+         ========================================================================= -->
+    <section class="hero-banner" id="hero" aria-label="Welcome to Monte Azur">
+      <div class="hero-banner__media-wrapper">
+        <!-- Dual-Video Engine for Seamless Infinite Crossfade Dissolve (No Loop Jumps) -->
+        <video class="hero-banner__video hero-banner__video--active" id="hero-video-a" src="assets/hero.mp4" autoplay
+          muted playsinline loop preload="auto"
+          poster="assets/images/hero-twilight-panorama.webp"
+          aria-hidden="true">
+          <source src="assets/hero.mp4" type="video/mp4">
+        </video>
+
+        <video class="hero-banner__video hero-banner__video--standby" id="hero-video-b" src="assets/hero.mp4" muted
+          playsinline loop preload="auto" aria-hidden="true">
+          <source src="assets/hero.mp4" type="video/mp4">
+        </video>
+
+        <!-- Static Fallback Image for graceful degradation during stream initialization -->
+        <img
+          src="assets/images/hero-twilight-panorama.webp"
+          alt="Monte Azur architectural stone and glass residence at dusk overlooking infinity pool and coastal bay"
+          class="hero-banner__image hero-banner__image--fallback" id="hero-fallback-image" fetchpriority="high"
+          loading="eager" decoding="async" width="1024" height="1024">
+        <div class="hero-banner__overlay"></div>
+      </div>
+
+      <div class="hero-banner__container hero-banner__container--editorial">
+        <div class="hero-banner__editorial-content">
+          <span class="hero-banner__eyebrow">A PRIVATE PACIFIC COAST SANCTUARY</span>
+          <h1 class="hero-banner__editorial-title">
+            <span class="hero-banner__mask">
+              <span class="hero-banner__editorial-line">Your Own</span>
+            </span>
+            <span class="hero-banner__mask">
+              <span class="hero-banner__editorial-line">Little Escape.</span>
+            </span>
+          </h1>
+
+          <div class="hero-banner__subline">
+            <span class="hero-banner__subline-dash"></span>
+            <span class="hero-banner__subline-text">ARCHITECTURAL STILLNESS &bull; THE PACIFIC HORIZON</span>
+            <span class="hero-banner__subline-dash"></span>
+          </div>
+
+          <p class="hero-banner__editorial-desc">
+            Slow down, settle in, and experience a private villa retreat designed around architectural stillness,
+            restorative ocean air, and the luxury of unhurried time.
+          </p>
+
+          <div class="hero-banner__actions">
+            <a href="#booking" class="btn btn--primary">
+              <span class="btn__text">Reserve Your Escape &rarr;</span>
+            </a>
+            <a href="#spaces" class="btn btn--secondary">
+              <span class="btn__text">Explore The Villa</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Minimal Scroll Indicator -->
+      <a href="#spaces" class="hero-banner__scroll" aria-label="Scroll to discover spaces">
+        <span class="hero-banner__scroll-text">EXPLORE</span>
+        <div class="hero-banner__scroll-line">
+          <span class="hero-banner__scroll-dot"></span>
+        </div>
+      </a>
+    </section>
+
+    <!-- =========================================================================
+         STAGE 1: FOUNDATION CODE — PINNED STACKED SPACES DECK
+         // STEP 1: Create the HTML structure
+         Why this code exists:
+         Replaces the 3-column mosaic with a vertically centered editorial intro on
+         the left and an interactive stacked card deck on the right.
+         The left title and text crossfade dynamically as the card images stack.
+         Tricky logic: Text slides are arranged in a CSS Grid deck (grid-area: 1/1)
+         so the container naturally sizes to the longest description without
+         causing layout shifts during GSAP crossfades.
+         ========================================================================= -->
+    <section class="spaces-section" id="spaces" aria-labelledby="spaces-title-active">
+      <div id="gallery"></div>
+      <div class="spaces-section__container">
+
+        <!-- LEFT COLUMN: Vertically Centered Editorial Introduction & Dynamic Text Deck -->
+        <div class="spaces-section__col spaces-section__col--intro">
+          <div class="spaces-intro">
+            <div class="spaces-intro__meta">
+              <span class="spaces-intro__label">OUR SPACES &mdash;</span>
+              <span class="spaces-intro__counter" id="spaces-counter" aria-live="polite">01 / 06</span>
+            </div>
+
+            <!-- Dynamic Text Deck: Titles and Descriptions change in sync with active stacked cards -->
+            <div class="spaces-intro__deck" id="spaces-intro-deck" aria-live="polite">
+              <!-- Slide 0 -->
+              <article class="spaces-intro__slide spaces-intro__slide--active" data-index="0">
+                <h2 class="spaces-intro__title" id="spaces-title-active">The Courtyard Lounge</h2>
+                <p class="spaces-intro__text">
+                  A seamless threshold between honed limestone interiors and twilight plunge pools, designed for private
+                  contemplation and effortless coastal living.
+                </p>
+              </article>
+
+              <!-- Slide 1 -->
+              <article class="spaces-intro__slide" data-index="1">
+                <h2 class="spaces-intro__title">Hillside Infinity Retreat</h2>
+                <p class="spaces-intro__text">
+                  Cantilevered stone terraces carved directly into dramatic rock faces, offering panoramic horizon lines
+                  and tranquil Pacific sunsets.
+                </p>
+              </article>
+
+              <!-- Slide 2 -->
+              <article class="spaces-intro__slide" data-index="2">
+                <h2 class="spaces-intro__title">Forest Glass Pavilion</h2>
+                <p class="spaces-intro__text">
+                  A secluded glass sanctuary enveloped by whispering birch trees, morning mist, and the warm crackle of
+                  a suspended wood hearth.
+                </p>
+              </article>
+
+              <!-- Slide 3 -->
+              <article class="spaces-intro__slide" data-index="3">
+                <h2 class="spaces-intro__title">Coastal Horizon Suite</h2>
+                <p class="spaces-intro__text">
+                  Sun-drenched oceanfront suites with private timber verandas, oriented to capture gentle morning tides
+                  and golden hour reflections.
+                </p>
+              </article>
+
+              <!-- Slide 4 -->
+              <article class="spaces-intro__slide" data-index="4">
+                <h2 class="spaces-intro__title">Oak &amp; Stone Villa</h2>
+                <p class="spaces-intro__text">
+                  Handcrafted teak joinery and solid dry-stacked limestone walls define a generous living pavilion
+                  tailored for shared connection.
+                </p>
+              </article>
+
+              <!-- Slide 5 -->
+              <article class="spaces-intro__slide" data-index="5">
+                <h2 class="spaces-intro__title">Riverbend Residence</h2>
+                <p class="spaces-intro__text">
+                  Dramatic cantilevered forms suspended over terraced waters, blending raw monolithic concrete with
+                  quiet organic luxury.
+                </p>
+              </article>
+            </div>
+
+            <!-- Progress Indicator Track -->
+            <div class="spaces-intro__progress" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="6"
+              aria-label="Spaces gallery progress">
+              <div class="spaces-intro__progress-bar" id="spaces-progress-bar"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: Stacked Card Deck (Bounds: max-width: 44rem; height: 72vh; Card Radius: 2rem) -->
+        <div class="spaces-section__col spaces-section__col--deck">
+          <div class="spaces-deck" id="spaces-deck">
+
+            <!-- Card 0: The Courtyard Home -->
+            <article class="space-card space-card--active" data-index="0" style="z-index: 10;">
+              <button type="button" class="space-card__trigger" data-lightbox-index="0"
+                aria-label="View The Courtyard Lounge in full screen">
+                <div class="space-card__media">
+                  <img
+                    src="assets/images/space-courtyard-lounge.webp"
+                    alt="Courtyard lounge seamlessly opening to twilight plunge pool" class="space-card__img"
+                    loading="eager" decoding="async" fetchpriority="high" width="1024" height="576">
+                  <div class="space-card__caption">
+                    <span class="space-card__title">The Courtyard Lounge &rarr;</span>
+                  </div>
+                </div>
+              </button>
+            </article>
+
+            <!-- Card 1: Hillside Retreat -->
+            <article class="space-card" data-index="1" style="z-index: 20;">
+              <button type="button" class="space-card__trigger" data-lightbox-index="1"
+                aria-label="View Hillside Infinity Retreat in full screen">
+                <div class="space-card__media">
+                  <img
+                    src="assets/images/space-infinity-pool-sunset.webp"
+                    alt="Cantilevered infinity pool overlooking Mediterranean dusk" class="space-card__img"
+                    loading="eager" decoding="async" width="1024" height="1024">
+                  <div class="space-card__caption">
+                    <span class="space-card__title">Hillside Retreat &rarr;</span>
+                  </div>
+                </div>
+              </button>
+            </article>
+
+            <!-- Card 2: Forest Glass Pavilion -->
+            <article class="space-card" data-index="2" style="z-index: 30;">
+              <button type="button" class="space-card__trigger" data-lightbox-index="2"
+                aria-label="View Forest Glass Pavilion in full screen">
+                <div class="space-card__media">
+                  <img
+                    src="assets/images/space-forest-glass-pavilion.webp"
+                    alt="Glass bedroom pavilion surrounded by birch trees and wood-burning stove"
+                    class="space-card__img" loading="eager" decoding="async" width="1500" height="1000">
+                  <div class="space-card__caption">
+                    <span class="space-card__title">Forest Glass Pavilion &rarr;</span>
+                  </div>
+                </div>
+              </button>
+            </article>
+
+            <!-- Card 3: Maple House (Coastal Horizon Suite) -->
+            <article class="space-card" data-index="3" style="z-index: 40;">
+              <button type="button" class="space-card__trigger" data-lightbox-index="3"
+                aria-label="View Coastal Horizon Suite in full screen">
+                <div class="space-card__media">
+                  <img
+                    src="assets/images/space-ocean-suite-sunrise.webp"
+                    alt="Sunlit bedroom overlooking coastal surf and golden mountains" class="space-card__img"
+                    loading="eager" decoding="async" width="1280" height="720">
+                  <div class="space-card__caption">
+                    <span class="space-card__title">Maple House &bull; Ocean Suite &rarr;</span>
+                  </div>
+                </div>
+              </button>
+            </article>
+
+            <!-- Card 4: Oak & Stone Villa -->
+            <article class="space-card" data-index="4" style="z-index: 50;">
+              <button type="button" class="space-card__trigger" data-lightbox-index="4"
+                aria-label="View Oak and Stone Living Pavilion in full screen">
+                <div class="space-card__media">
+                  <img
+                    src="assets/images/space-living-pavilion-teak.webp"
+                    alt="Grand living pavilion featuring curved sofa and handcrafted teak walls" class="space-card__img"
+                    loading="eager" decoding="async" width="2049" height="1153">
+                  <div class="space-card__caption">
+                    <span class="space-card__title">Oak &amp; Stone Villa &rarr;</span>
+                  </div>
+                </div>
+              </button>
+            </article>
+
+            <!-- Card 5: Riverbend Residence -->
+            <article class="space-card" data-index="5" style="z-index: 60;">
+              <button type="button" class="space-card__trigger" data-lightbox-index="5"
+                aria-label="View Sunset Headland Terrace in full screen">
+                <div class="space-card__media">
+                  <img
+                    src="assets/images/space-riverbend-sunset-terrace.webp"
+                    alt="Cantilevered concrete villa terrace at sunset overlooking infinity pool and sea"
+                    class="space-card__img" loading="eager" decoding="async" width="1376" height="768">
+                  <div class="space-card__caption">
+                    <span class="space-card__title">Riverbend Residence &rarr;</span>
+                  </div>
+                </div>
+              </button>
+            </article>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION D: RECOGNITION FOR EXCELLENCE (BEM: .awards-ribbon)
+         Why: Exact architectural award credentials ribbon from the reference image.
+         ========================================================================= -->
+    <section class="awards-ribbon" aria-label="Recognition &amp; Honors">
+      <div class="awards-ribbon__container">
+        <div class="awards-ribbon__header">
+          <span class="awards-ribbon__label">RECOGNIZED FOR EXCELLENCE &mdash;</span>
+        </div>
+
+        <div class="awards-ribbon__grid">
+          <!-- Award 1 -->
+          <div class="award-item">
+            <div class="award-item__icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="6" height="18" rx="1" />
+                <rect x="9" y="3" width="6" height="18" rx="1" />
+                <rect x="15" y="3" width="6" height="18" rx="1" />
+              </svg>
+            </div>
+            <div class="award-item__details">
+              <span class="award-item__title">ARCHITECTURE MASTERPRIZE</span>
+              <span class="award-item__year">2024</span>
+            </div>
+          </div>
+
+          <!-- Award 2 -->
+          <div class="award-item">
+            <div class="award-item__icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 2L3 21h18L12 2zm0 6l4.5 9h-9L12 8z" />
+              </svg>
+            </div>
+            <div class="award-item__details">
+              <span class="award-item__title">A' DESIGN AWARD WINNER</span>
+              <span class="award-item__year">2023</span>
+            </div>
+          </div>
+
+          <!-- Award 3 -->
+          <div class="award-item">
+            <div class="award-item__icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 7v5l3 3" />
+              </svg>
+            </div>
+            <div class="award-item__details">
+              <span class="award-item__title">IDA DESIGN AWARDS</span>
+              <span class="award-item__year">2023</span>
+            </div>
+          </div>
+
+          <!-- Award 4 -->
+          <div class="award-item">
+            <div class="award-item__icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                <polyline points="2 17 12 22 22 17" />
+                <polyline points="2 12 12 17 22 12" />
+              </svg>
+            </div>
+            <div class="award-item__details">
+              <span class="award-item__title">WAN AWARDS FINALIST</span>
+              <span class="award-item__year">2022</span>
+            </div>
+          </div>
+
+          <!-- Award 5 -->
+          <div class="award-item">
+            <div class="award-item__icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M8 17l4-10 4 10M9.5 13h5" />
+              </svg>
+            </div>
+            <div class="award-item__details">
+              <span class="award-item__title">AR HOUSE AWARDS</span>
+              <span class="award-item__year">2022</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION E: ABOUT THE RESIDENCE (BEM: .property-about)
+         Why: High-contrast editorial 2-column composition detailing architectural
+         intent, natural material palette, and spatial metrics.
+         ========================================================================= -->
+    <section class="property-about section-padding" id="about" aria-labelledby="about-title">
+      <div class="property-about__container">
+        <header class="section-header">
+          <span class="section-header__label">THE RESIDENCE &mdash;</span>
+          <h2 class="section-header__title" id="about-title">
+            <span class="section-header__mask"><span class="section-header__title-line">More than a place to
+                stay.</span></span>
+            <span class="section-header__mask"><span class="section-header__title-line">A space to
+                reconnect.</span></span>
+          </h2>
+        </header>
+
+        <div class="property-about__grid">
+          <!-- Text Column -->
+          <div class="property-about__narrative">
+            <p class="property-about__paragraph property-about__paragraph--highlight">
+              Perched high on the sunlit cliffs above the bay, Monte Azur was conceived as a private architectural
+              retreat where the boundaries between interior solace and the ocean horizon dissolve effortlessly.
+            </p>
+            <p class="property-about__paragraph">
+              Crafted with warm teak paneling, honed travertine terraces, and floor-to-ceiling glass expanses, every
+              room welcomes natural daylight, ocean breezes, and panoramic dusk reflections.
+            </p>
+            <p class="property-about__paragraph">
+              Whether you are sharing a quiet breakfast overlooking the water, gathering for an evening dinner prepared
+              in the gourmet kitchen, or taking a midnight swim beneath the stars, every space invites presence and
+              ease.
+            </p>
+
+            <div class="property-about__specs">
+              <div class="spec-card">
+                <span class="spec-card__number">4,800 sq ft</span>
+                <span class="spec-card__label">Living &amp; Terrace Space (446 m&sup2;)</span>
+              </div>
+              <div class="spec-card">
+                <span class="spec-card__number">4.5</span>
+                <span class="spec-card__label">Designer Bathrooms</span>
+              </div>
+              <div class="spec-card">
+                <span class="spec-card__number">2</span>
+                <span class="spec-card__label">Private Pools (Main + Plunge)</span>
+              </div>
+              <div class="spec-card">
+                <span class="spec-card__number">24/7</span>
+                <span class="spec-card__label">Dedicated Villa Concierge</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Asymmetric Visual Composition -->
+          <div class="property-about__visuals">
+            <figure class="property-about__figure property-about__figure--primary">
+              <div class="image-reveal image-reveal--clip" data-reveal="clip">
+                <img
+                  src="assets/images/space-living-pavilion-teak.webp"
+                  alt="Monte Azur main living pavilion featuring curved designer sofa, teak wood walls, and pool terrace"
+                  class="property-about__img" loading="eager" decoding="async" width="2049" height="1153">
+              </div>
+              <figcaption class="property-about__caption">Main Living Pavilion &bull; Handcrafted Teak &amp; Honed Stone
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION F: THE EXPERIENCE CHAPTERS (BEM: .story-experience)
+         ========================================================================= -->
+    <section class="story-experience section-padding" id="experience" aria-labelledby="experience-title">
+      <div class="story-experience__container">
+        <header class="section-header section-header--center">
+          <span class="section-header__label">THE EXPERIENCE &mdash;</span>
+          <h2 class="section-header__title" id="experience-title">
+            <span class="section-header__mask"><span class="section-header__title-line">Space to unwind.</span></span>
+            <span class="section-header__mask"><span class="section-header__title-line">Time to reconnect.</span></span>
+          </h2>
+          <p class="section-header__subtitle">Thoughtfully curated moments designed to let everyday pressure fade into
+            the sound of the tide.</p>
+        </header>
+
+        <div class="story-experience__chapters">
+          <!-- Chapter 1 -->
+          <article class="experience-card experience-card--left" data-scroll-item>
+            <div class="experience-card__media">
+              <div class="image-reveal image-reveal--clip" data-reveal="clip">
+                <img
+                  src="assets/images/space-ocean-suite-sunrise.webp"
+                  alt="Wake up to panoramic ocean views from the sunlit master bed" class="experience-card__image"
+                  loading="eager" decoding="async" width="1280" height="720">
+              </div>
+            </div>
+            <div class="experience-card__content">
+              <span class="experience-card__index">CHAPTER 01</span>
+              <h3 class="experience-card__title">
+                <span class="experience-card__mask"><span class="experience-card__title-line">Quiet Mornings Over The
+                    Bay</span></span>
+              </h3>
+              <p class="experience-card__body">
+                Begin your day without alarms. Wake to warm amber light washing across natural linen, brew fresh
+                espresso, and watch morning mist lift off the coastline from the warmth of your bedside.
+              </p>
+              <ul class="experience-card__highlights">
+                <li>Automated blackout-to-sheer morning curtains</li>
+                <li>Panoramic seaside views from every bed</li>
+                <li>Organic cotton linens and artisan stoneware mugs</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Chapter 2 -->
+          <article class="experience-card experience-card--right" data-scroll-item>
+            <div class="experience-card__media">
+              <div class="image-reveal image-reveal--clip" data-reveal="clip">
+                <img
+                  src="assets/images/experience-gathering-dining.webp"
+                  alt="Great room with cozy furniture and sunset glow" class="experience-card__image" loading="eager"
+                  decoding="async" width="1280" height="854">
+              </div>
+            </div>
+            <div class="experience-card__content">
+              <span class="experience-card__index">CHAPTER 02</span>
+              <h3 class="experience-card__title">
+                <span class="experience-card__mask"><span class="experience-card__title-line">Unrushed Gatherings &amp;
+                    Long Dinners</span></span>
+              </h3>
+              <p class="experience-card__body">
+                Open-plan architecture means whoever is cooking is part of the conversation. Dine at the solid wood
+                table or take plates outside to the terrace as twilight paints the horizon.
+              </p>
+              <ul class="experience-card__highlights">
+                <li>Chef-caliber gas range and wine storage</li>
+                <li>Comfortable curved lounge seating for intimate talks</li>
+                <li>Sonos architectural audio throughout the social zones</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Chapter 3 -->
+          <article class="experience-card experience-card--left" data-scroll-item>
+            <div class="experience-card__media">
+              <div class="image-reveal image-reveal--clip" data-reveal="clip">
+                <img
+                  src="assets/images/space-forest-glass-pavilion.webp"
+                  alt="Glass bedroom pavilion surrounded by birch trees and wood-burning stove"
+                  class="experience-card__image" loading="eager" decoding="async" width="1500" height="1000">
+              </div>
+            </div>
+            <div class="experience-card__content">
+              <span class="experience-card__index">CHAPTER 03</span>
+              <h3 class="experience-card__title">
+                <span class="experience-card__mask"><span class="experience-card__title-line">Secluded Immersion in
+                    Nature</span></span>
+              </h3>
+              <p class="experience-card__body">
+                Retreat to the forest pavilion. Surrounded by native birch trees with a cast-iron stove warming the
+                corner, this glass sanctuary creates an intimate haven for reading or restorative afternoon naps.
+              </p>
+              <ul class="experience-card__highlights">
+                <li>Triple-glazed acoustic glass for absolute stillness</li>
+                <li>Indoor wood-burning fireplace with curated firewood</li>
+                <li>Private forest patio and reading bench</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Chapter 4 -->
+          <article class="experience-card experience-card--right" data-scroll-item>
+            <div class="experience-card__media">
+              <div class="image-reveal image-reveal--clip" data-reveal="clip">
+                <img
+                  src="assets/images/space-infinity-pool-sunset.webp"
+                  alt="Infinity pool hanging over the Mediterranean cliffside at sunset" class="experience-card__image"
+                  loading="eager" decoding="async" width="1024" height="1024">
+              </div>
+            </div>
+            <div class="experience-card__content">
+              <span class="experience-card__index">CHAPTER 04</span>
+              <h3 class="experience-card__title">
+                <span class="experience-card__mask"><span class="experience-card__title-line">Sunset Swims &amp;
+                    Twilight Stillness</span></span>
+              </h3>
+              <p class="experience-card__body">
+                As the golden sun touches the ocean ridge, step into the heated infinity pool. With water blending
+                seamlessly into the open horizon, it is an unforgettable vantage point for ending each day.
+              </p>
+              <ul class="experience-card__highlights">
+                <li>Geothermally heated freshwater pool</li>
+                <li>Sunken stone fire pit lounge on the pool deck</li>
+                <li>Subtle architectural night lighting</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION F.2: THE RESIDENCE CINEMATIC TOUR (BEM: .residence-tour)
+         Why: Full-bleed 100vh canvas scrub animation driven by frame sequence.
+         Provides an interactive architectural walkthrough between Experience and Amenities.
+         ========================================================================= -->
+    <section class="residence-tour" id="tour" aria-label="Interactive Residence Cinematic Tour">
+      <div class="residence-tour__viewport">
+        <canvas class="residence-tour__canvas" id="tour-canvas" width="1280" height="720"
+          aria-label="Cinematic walkthrough animation of Monte Azur"></canvas>
+
+        <!-- Cinematic Vignette Scrim for Contrast -->
+        <div class="residence-tour__scrim" aria-hidden="true"></div>
+
+        <!-- Seamless Transition Overlay (Pure Sand: --color-sand) -->
+        <div class="residence-tour__transition" id="tour-transition" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION F.3: RESIDENCE TRANSITIONAL SPACER (BEM: .tour-spacer)
+         STAGE 1: FOUNDATION CODE
+         // STEP 1: Create the HTML structure
+         Why this code exists:
+         Acts as an architectural spacer and pure background color transition corridor
+         between the residence tour canvas (#tour) and Section G (.amenities-section)
+         using --color-sand.
+         Tricky logic:
+         Placed immediately after the pinned #tour section in document flow so that
+         when the 250vh pin duration completes, this spacer smoothly maintains the
+         --color-sand background without black gradients or banding.
+         TODO: Strict BEM naming and flat 0,1,0 specificity.
+         ========================================================================= -->
+    <div class="tour-spacer" id="tour-spacer" aria-hidden="true">
+      <div class="tour-spacer__gradient"></div>
+    </div>
+
+    <!-- =========================================================================
+         SECTION G: AMENITIES & THOUGHTFUL DETAILS (BEM: .amenities-section)
+         ========================================================================= -->
+    <section class="amenities-section section-padding" id="amenities" aria-labelledby="amenities-title">
+      <div class="amenities-section__container">
+        <header class="section-header section-header--center">
+          <span class="section-header__label">THOUGHTFUL DETAILS &mdash;</span>
+          <h2 class="section-header__title" id="amenities-title">
+            <span class="section-header__mask"><span class="section-header__title-line">Everything you need to feel at
+                home.</span></span>
+          </h2>
+          <p class="section-header__subtitle">Carefully considered comforts that make settling in effortless from the
+            moment you arrive.</p>
+        </header>
+
+        <div class="amenities-grid">
+          <!-- Card 1: Comfort & Relaxation -->
+          <article class="amenity-card">
+            <div class="amenity-card__media">
+              <img
+                src="assets/images/space-infinity-pool-sunset.webp"
+                alt="Heated infinity plunge pool overlooking twilight Pacific horizon" class="amenity-card__img"
+                loading="eager" decoding="async" width="1024" height="680">
+              <div class="amenity-card__icon-badge" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M2 12h20M20 12v6a2 2 0 01-2 2H6a2 2 0 01-2-2v-6M4 12V7a3 3 0 013-3h10a3 3 0 013 3v5" />
+                </svg>
+              </div>
+            </div>
+            <div class="amenity-card__body">
+              <h3 class="amenity-card__title">Comfort &amp; Relaxation</h3>
+              <ul class="amenity-card__list">
+                <li>Heated 20m zero-edge infinity pool</li>
+                <li>Separate private courtyard plunge pool</li>
+                <li>Sunken outdoor stone fire pit with firewood</li>
+                <li>Multi-zone climate control heating &amp; cooling</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Card 2: Bedroom Essentials -->
+          <article class="amenity-card">
+            <div class="amenity-card__media">
+              <img
+                src="assets/images/amenity-bedroom-suites.webp"
+                alt="Private ocean-view King suite with skylight and garden glass walls" class="amenity-card__img"
+                loading="eager" decoding="async" width="984" height="656">
+              <div class="amenity-card__icon-badge" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M3 7v11m0-4h18m0-7v11M3 11h18M7 7v4m10-4v4" />
+                </svg>
+              </div>
+            </div>
+            <div class="amenity-card__body">
+              <h3 class="amenity-card__title">Bedroom Essentials</h3>
+              <ul class="amenity-card__list">
+                <li>4 Private ocean-view suites with King beds</li>
+                <li>Organic washed linen &amp; down duvets</li>
+                <li>Ensuite bathrooms with rainfall showers</li>
+                <li>Motorized blackout shades &amp; sheer drapes</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Card 3: Kitchen & Dining (Higgsfield/AI-Generated Architectural Photograph) -->
+          <article class="amenity-card">
+            <div class="amenity-card__media">
+              <img src="assets/images/amenity-kitchen-dining.webp"
+                alt="Minimalist luxury chef's kitchen with travertine island and oceanfront dining terrace"
+                class="amenity-card__img" loading="eager" decoding="async" width="1792" height="1024">
+              <div class="amenity-card__icon-badge" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3" />
+                </svg>
+              </div>
+            </div>
+            <div class="amenity-card__body">
+              <h3 class="amenity-card__title">Kitchen &amp; Dining</h3>
+              <ul class="amenity-card__list">
+                <li>Full chef's kitchen with induction cooktop</li>
+                <li>Espresso bar with locally roasted beans</li>
+                <li>Temperature-controlled wine cabinet</li>
+                <li>Alfresco dining table seating 10 guests</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Card 4: Entertainment & Audio -->
+          <article class="amenity-card">
+            <div class="amenity-card__media">
+              <img
+                src="assets/images/amenity-salon-entertainment.webp"
+                alt="Evening lounge salon with wood acoustics, ambient lanterns, and bar seating"
+                class="amenity-card__img" loading="eager" decoding="async" width="815" height="543">
+              <div class="amenity-card__icon-badge" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M9 18V5l12-2v13M9 9l12-2M6 21a3 3 0 100-6 3 3 0 000 6zM18 19a3 3 0 100-6 3 3 0 000 6z" />
+                </svg>
+              </div>
+            </div>
+            <div class="amenity-card__body">
+              <h3 class="amenity-card__title">Entertainment &amp; Audio</h3>
+              <ul class="amenity-card__list">
+                <li>Sonos architectural sound across living &amp; pool</li>
+                <li>Art-mode easel 4K displays in suites</li>
+                <li>Classic pool / billiards table in salon</li>
+                <li>Curated library of art &amp; architecture books</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Card 5: Outdoor & Grounds (Higgsfield/AI-Generated Architectural Photograph) -->
+          <article class="amenity-card">
+            <div class="amenity-card__media">
+              <img src="assets/images/amenity-outdoor-grounds.webp"
+                alt="Private Mediterranean coastal path with ancient olive trees, lavender, and cliffside sun terrace"
+                class="amenity-card__img" loading="eager" decoding="async" width="1792" height="1024">
+              <div class="amenity-card__icon-badge" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path
+                    d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41M12 17a5 5 0 100-10 5 5 0 000 10z" />
+                </svg>
+              </div>
+            </div>
+            <div class="amenity-card__body">
+              <h3 class="amenity-card__title">Outdoor &amp; Grounds</h3>
+              <ul class="amenity-card__list">
+                <li>Private Mediterranean flora &amp; olive garden</li>
+                <li>Teak sun loungers and shaded daybeds</li>
+                <li>Private cliffside walking trail to secluded cove</li>
+                <li>Yoga mats and meditation cushions provided</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Card 6: Convenience & Service (Higgsfield/AI-Generated Architectural Photograph) -->
+          <article class="amenity-card">
+            <div class="amenity-card__media">
+              <img src="assets/images/amenity-convenience-service.webp"
+                alt="Natural limestone porte-cochère with warm sconce lighting and minimalist teak keyless entry"
+                class="amenity-card__img" loading="eager" decoding="async" width="1792" height="1024">
+              <div class="amenity-card__icon-badge" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01" />
+                </svg>
+              </div>
+            </div>
+            <div class="amenity-card__body">
+              <h3 class="amenity-card__title">Convenience &amp; Service</h3>
+              <ul class="amenity-card__list">
+                <li>High-speed fiber Wi-Fi throughout estate</li>
+                <li>Keyless biometric &amp; secure code entry</li>
+                <li>Private gated parking with EV charger</li>
+                <li>Daily housekeeping &amp; pre-arrival grocery stocking</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION G: GUEST PERSPECTIVES & PRIVATE REFLECTIONS (BEM: .reviews-section)
+         Why: High-trust editorial social proof bridging amenities and the booking
+         decision. Uses authentic verified stay reflections.
+         ========================================================================= -->
+    <section class="reviews-section section-padding" id="reviews" aria-labelledby="reviews-title">
+      <div class="reviews-section__container">
+        <header class="section-header section-header--center">
+          <span class="section-header__label">GUEST PERSPECTIVES &mdash;</span>
+          <h2 class="section-header__title" id="reviews-title">
+            <span class="section-header__mask"><span class="section-header__title-line">Moments
+                remembered.</span></span>
+          </h2>
+          <p class="section-header__subtitle">
+            Reflections from those who have experienced the stillness, craft, and restorative air of Monte Azur.
+          </p>
+        </header>
+
+        <div class="reviews-grid">
+          <article class="review-card">
+            <div class="review-card__stars" aria-label="5 star rating" role="img">
+              <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+            </div>
+            <blockquote class="review-card__quote">
+              &ldquo;Waking up to the morning fog clearing over the cantilevered infinity pool is a sensory memory that
+              stays with you. The architecture feels entirely at one with the cliffside.&rdquo;
+            </blockquote>
+            <div class="review-card__author">
+              <span class="review-card__name">Julian &amp; Marcus Vance</span>
+              <span class="review-card__meta">October 2025 &bull; Architectural Sabbatical</span>
+            </div>
+          </article>
+
+          <article class="review-card review-card--featured">
+            <div class="review-card__stars" aria-label="5 star rating" role="img">
+              <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+            </div>
+            <blockquote class="review-card__quote">
+              &ldquo;Every single detail—from the heated limestone bath floors to the private chef liaison—was executed
+              with quiet, invisible perfection. The sheer peace of the property is unmatched.&rdquo;
+            </blockquote>
+            <div class="review-card__author">
+              <span class="review-card__name">Elena Rostova</span>
+              <span class="review-card__meta">August 2025 &bull; Family Milestone Gathering</span>
+            </div>
+          </article>
+
+          <article class="review-card">
+            <div class="review-card__stars" aria-label="5 star rating" role="img">
+              <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+            </div>
+            <blockquote class="review-card__quote">
+              &ldquo;The absolute silence of the property at sunset, watching the Pacific horizon from the outdoor
+              hearth, is restorative beyond words. We are already planning our return.&rdquo;
+            </blockquote>
+            <div class="review-card__author">
+              <span class="review-card__name">Dr. Alistair Finch</span>
+              <span class="review-card__meta">June 2025 &bull; 4-Night Coastal Escape</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="reviews-trust-badge">
+          <span class="reviews-trust-badge__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+          </span>
+          <span class="reviews-trust-badge__text">Rated 4.98 / 5.0 Across 42 Verified Private Villa Stays</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION H: BOOKING & AVAILABILITY CALENDAR (BEM: .booking-section)
+         ========================================================================= -->
+    <section class="booking-section section-padding" id="booking" aria-labelledby="booking-title">
+      <div class="booking-section__container">
+        <header class="section-header section-header--center">
+          <span class="section-header__label">PLAN YOUR ESCAPE &mdash;</span>
+          <h2 class="section-header__title" id="booking-title">
+            <span class="section-header__mask"><span class="section-header__title-line">Your next getaway starts
+                here.</span></span>
+          </h2>
+          <p class="section-header__subtitle">Select your dates to check availability and calculate an itemized stay
+            estimate.</p>
+        </header>
+
+        <div class="booking-layout">
+          <!-- Calendar Interface -->
+          <div class="booking-calendar-card">
+            <div class="calendar-controls">
+              <button type="button" class="calendar-controls__btn" id="cal-prev" aria-label="Previous month">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M15 18l-6-6 6-6" />
+                </svg>
+              </button>
+              <h3 class="calendar-controls__heading" id="cal-month-year" aria-live="polite">Month Year</h3>
+              <button type="button" class="calendar-controls__btn" id="cal-next" aria-label="Next month">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </button>
+            </div>
+
+            <div class="calendar-weekdays" aria-hidden="true">
+              <span>Sun</span>
+              <span>Mon</span>
+              <span>Tue</span>
+              <span>Wed</span>
+              <span>Thu</span>
+              <span>Fri</span>
+              <span>Sat</span>
+            </div>
+
+            <div class="calendar-grid" id="calendar-grid" role="grid" aria-labelledby="cal-month-year"></div>
+
+            <div class="calendar-legend">
+              <div class="legend-item">
+                <span class="legend-dot legend-dot--available"></span>
+                <span>Available</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot legend-dot--selected"></span>
+                <span>Selected</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot legend-dot--booked"></span>
+                <span>Reserved</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-item__policy">&bull; Minimum 2 Nights</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Booking Summary & Guest Selection Card -->
+          <div class="booking-summary-card">
+            <h3 class="booking-summary-card__title">Reservation Estimate</h3>
+
+            <div class="booking-dates-preview">
+              <div class="booking-date-box">
+                <span class="booking-date-box__label">CHECK-IN</span>
+                <span class="booking-date-box__value" id="preview-checkin">Select date</span>
+              </div>
+              <div class="booking-dates-preview__divider" aria-hidden="true">&rarr;</div>
+              <div class="booking-date-box">
+                <span class="booking-date-box__label">CHECK-OUT</span>
+                <span class="booking-date-box__value" id="preview-checkout">Select date</span>
+              </div>
+            </div>
+            <button type="button" class="btn-reset-dates" id="btn-reset-dates" hidden>Reset selected dates
+              &times;</button>
+
+            <div class="guest-selector">
+              <div class="guest-counter">
+                <div class="guest-counter__info">
+                  <span class="guest-counter__label">Adults</span>
+                  <span class="guest-counter__note">Ages 13+</span>
+                </div>
+                <div class="guest-counter__actions">
+                  <button type="button" class="guest-counter__btn" id="adults-dec" aria-label="Decrease adults"
+                    disabled>-</button>
+                  <span class="guest-counter__count" id="adults-count" aria-live="polite">2</span>
+                  <button type="button" class="guest-counter__btn" id="adults-inc"
+                    aria-label="Increase adults">+</button>
+                </div>
+              </div>
+
+              <div class="guest-counter">
+                <div class="guest-counter__info">
+                  <span class="guest-counter__label">Children</span>
+                  <span class="guest-counter__note">Ages 2–12</span>
+                </div>
+                <div class="guest-counter__actions">
+                  <button type="button" class="guest-counter__btn" id="children-dec" aria-label="Decrease children"
+                    disabled>-</button>
+                  <span class="guest-counter__count" id="children-count" aria-live="polite">0</span>
+                  <button type="button" class="guest-counter__btn" id="children-inc"
+                    aria-label="Increase children">+</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="price-breakdown" id="price-breakdown" hidden>
+              <div class="price-row">
+                <span class="price-row__label" id="rate-line">₱48,500 &times; <span id="nights-count">0</span>
+                  nights</span>
+                <span class="price-row__value" id="subtotal-val">₱0</span>
+              </div>
+              <div class="price-row">
+                <span class="price-row__label">Cleaning &amp; Villa Prep</span>
+                <span class="price-row__value">₱14,500</span>
+              </div>
+              <div class="price-row">
+                <span class="price-row__label">Hospitality Concierge (8%)</span>
+                <span class="price-row__value" id="service-fee-val">₱0</span>
+              </div>
+              <div class="price-divider"></div>
+              <div class="price-row price-row--total">
+                <span class="price-row__label">Estimated Total (PHP)</span>
+                <span class="price-row__value" id="total-val">₱0</span>
+              </div>
+            </div>
+
+            <div class="booking-status-notice" id="booking-status-notice">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                aria-hidden="true">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 16v-4M12 8h.01" />
+              </svg>
+              <span>Please select your check-in and check-out dates on the calendar.</span>
+            </div>
+
+            <button type="button" class="btn btn--primary btn--full" id="btn-open-inquiry" disabled>
+              <span class="btn__text">Continue to Booking Inquiry</span>
+              <svg class="btn__icon btn__icon--arrow" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </button>
+
+            <p class="booking-summary-card__disclaimer">
+              <strong>Transparent Booking:</strong> This estimate is based on published seasonal rates. Submitting this
+              form sends a formal inquiry directly to our villa manager. No charges are incurred until dates are
+              confirmed with you.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION I: LOCATION & GETTING HERE (BEM: .location-guide)
+         ========================================================================= -->
+    <section class="location-guide section-padding" id="location" aria-labelledby="location-title">
+      <div class="location-guide__container">
+        <div class="location-guide__grid">
+          <div class="location-guide__info">
+            <header class="section-header">
+              <span class="section-header__label">LOCATION &mdash;</span>
+              <h2 class="section-header__title" id="location-title">
+                <span class="section-header__mask"><span class="section-header__title-line">Easy to find.</span></span>
+                <span class="section-header__mask"><span class="section-header__title-line">Hard to leave.</span></span>
+              </h2>
+            </header>
+            <p class="location-guide__lead">
+              Monte Azur is privately positioned on the southern coastal headlands, secluded behind a
+              gated olive grove while remaining conveniently accessible from regional transit.
+            </p>
+
+            <div class="location-distances">
+              <div class="distance-item">
+                <span class="distance-item__time">45 Min</span>
+                <span class="distance-item__label">International Airport (Helipad transfer available upon
+                  request)</span>
+              </div>
+              <div class="distance-item">
+                <span class="distance-item__time">12 Min</span>
+                <span class="distance-item__label">Historic Coastal Harbor Village &amp; Fine Dining</span>
+              </div>
+              <div class="distance-item">
+                <span class="distance-item__time">5 Min</span>
+                <span class="distance-item__label">Private Beach Cove via Estate Path</span>
+              </div>
+            </div>
+
+            <p class="location-guide__privacy-note">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                aria-hidden="true">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0110 0v4" />
+              </svg>
+              <span>To protect guest privacy, the exact gate address and access codes are provided exclusively upon
+                confirmed booking.</span>
+            </p>
+          </div>
+
+          <div class="location-guide__visual">
+            <div class="location-card">
+              <div class="location-card__map-simulation">
+                <div class="map-grid-lines" aria-hidden="true"></div>
+                <div class="map-marker">
+                  <div class="map-marker__pulse"></div>
+                  <div class="map-marker__dot"></div>
+                  <span class="map-marker__label">Monte Azur</span>
+                </div>
+                <div class="map-coordinate">43° 32' 14" N &bull; 7° 01' 22" E</div>
+              </div>
+              <div class="location-card__footer">
+                <span class="location-card__region">CÔTE BLANCHE &bull; PRIVATE HEADLAND</span>
+                <a href="#booking" class="btn btn--outline">Inquire for Chauffeur</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION J: FINAL BOOKING CTA (BEM: .closing-cta)
+         ========================================================================= -->
+    <section class="closing-cta" id="cta-closing" aria-label="Book your stay today">
+      <div class="closing-cta__media">
+        <img
+          src="assets/images/space-riverbend-sunset-terrace.webp"
+          alt="Monte Azur lighted pool terrace at twilight" class="closing-cta__image" loading="eager" decoding="async" width="1376"
+          height="768">
+        <div class="closing-cta__overlay"></div>
+      </div>
+
+      <div class="closing-cta__container">
+        <div class="closing-cta__box">
+          <span class="closing-cta__eyebrow">YOUR STAY AWAITS</span>
+          <h2 class="closing-cta__title">
+            <span class="closing-cta__mask"><span class="closing-cta__title-line">Make room for a little
+                escape.</span></span>
+          </h2>
+          <p class="closing-cta__text">
+            Choose your dates, gather your favorite people, and start planning an unforgettable stay at Monte Azur.
+          </p>
+          <div class="closing-cta__actions">
+            <a href="#booking" class="btn btn--primary">
+              <span class="btn__text">Check Availability &amp; Rates</span>
+              <svg class="btn__icon btn__icon--arrow" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       SECTION K: SITE FOOTER (BEM: .site-footer)
+       ========================================================================= -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="site-footer__container">
+      <div class="site-footer__grid">
+        <div class="site-footer__col site-footer__col--brand">
+          <a href="#hero" class="site-footer__brand" aria-label="Monte Azur Home">
+            <span class="site-footer__logo">MONTE AZUR</span>
+          </a>
+          <p class="site-footer__desc">
+            An architectural cliffside retreat celebrating light, silence, and genuine hospitality. Available for
+            private buyout and curated staycations.
+          </p>
+          <div class="site-footer__status">
+            <span class="status-indicator"></span>
+            <span>Now taking reservations for 2026/2027 seasons</span>
+          </div>
+        </div>
+
+        <div class="site-footer__col">
+          <h4 class="site-footer__heading">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="#spaces" class="footer-links__link">The Spaces</a></li>
+            <li><a href="#about" class="footer-links__link">The Residence</a></li>
+            <li><a href="#experience" class="footer-links__link">The Experience</a></li>
+            <li><a href="#amenities" class="footer-links__link">Amenities</a></li>
+            <li><a href="#booking" class="footer-links__link">Availability &amp; Rates</a></li>
+          </ul>
+        </div>
+
+        <div class="site-footer__col">
+          <h4 class="site-footer__heading">House Rules</h4>
+          <ul class="footer-links">
+            <li class="footer-links__text">Check-in: 3:00 PM &bull; Check-out: 11:00 AM</li>
+            <li class="footer-links__text">Maximum 8 Registered Guests</li>
+            <li class="footer-links__text">Smoke-free indoor environment</li>
+            <li class="footer-links__text">Quiet hours after 11:00 PM</li>
+            <li class="footer-links__text">Pet friendly upon prior inquiry</li>
+          </ul>
+        </div>
+
+        <div class="site-footer__col">
+          <h4 class="site-footer__heading">Inquiries &amp; Host</h4>
+          <p class="site-footer__contact-line">Concierge: <strong>inquire@monteazur.com</strong></p>
+          <p class="site-footer__contact-line">Direct Liaison: <strong>+1 (800) 555-0198</strong></p>
+          <p class="site-footer__contact-line">Monte Azur Coastal Reserve</p>
+        </div>
+      </div>
+
+      <div class="site-footer__bottom">
+        <p class="site-footer__copyright">&copy; 2026 Monte Azur Residence. All rights reserved.</p>
+        <ul class="site-footer__legal-links">
+          <li><a href="#privacy" class="site-footer__legal-link">Privacy Policy</a></li>
+          <li><a href="#terms" class="site-footer__legal-link">Booking Terms</a></li>
+          <li><a href="#cancellation" class="site-footer__legal-link">Cancellation Policy</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- =========================================================================
+       MODAL 1: ACCESSIBLE FULLSCREEN PHOTO LIGHTBOX (BEM: .lightbox-modal)
+       ========================================================================= -->
+  <div class="lightbox-modal" id="lightbox-modal" role="dialog" aria-modal="true" aria-label="Photo Lightbox"
+    data-lenis-prevent hidden>
+    <div class="lightbox-modal__backdrop" id="lightbox-backdrop"></div>
+    <div class="lightbox-modal__container">
+      <button type="button" class="lightbox-modal__close" id="lightbox-close" aria-label="Close Lightbox (Esc)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12" />
+        </svg>
+      </button>
+
+      <button type="button" class="lightbox-modal__nav lightbox-modal__nav--prev" id="lightbox-prev"
+        aria-label="Previous photo (Left arrow)">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
+
+      <div class="lightbox-modal__content">
+        <figure class="lightbox-modal__figure">
+          <img src="" alt="" class="lightbox-modal__image" id="lightbox-image">
+          <figcaption class="lightbox-modal__caption" id="lightbox-caption"></figcaption>
+        </figure>
+      </div>
+
+      <button type="button" class="lightbox-modal__nav lightbox-modal__nav--next" id="lightbox-next"
+        aria-label="Next photo (Right arrow)">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 18l6-6-6-6" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 2: BOOKING INQUIRY DIALOG (BEM: .booking-modal)
+       ========================================================================= -->
+  <div class="booking-modal" id="inquiry-modal" role="dialog" aria-modal="true" aria-labelledby="inquiry-title" hidden>
+    <div class="booking-modal__backdrop" id="inquiry-backdrop"></div>
+    <div class="booking-modal__dialog">
+      <div class="booking-modal__header" id="inquiry-header">
+        <h3 class="booking-modal__title" id="inquiry-title">Confirm Booking Request</h3>
+        <button type="button" class="booking-modal__close" id="inquiry-close" aria-label="Close booking inquiry">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- STAGE 1: FOUNDATION CODE — Modal Body Scrollport Container
+           // STEP 1: Create the HTML structure
+           Why: data-lenis-prevent isolates modal touch and wheel scrolling from page Lenis instance. -->
+      <div class="booking-modal__body" data-lenis-prevent>
+        <form class="inquiry-form" id="inquiry-form">
+          <div class="inquiry-form__grid">
+            <!-- =========================================================================
+                 LEFT COLUMN: RESERVATION OVERVIEW & GUEST DETAILS (BEM: .inquiry-form__col--info)
+                 ========================================================================= -->
+            <div class="inquiry-form__col inquiry-form__col--info">
+              <!-- Itemized Stay Summary Card -->
+              <div class="inquiry-summary" id="inquiry-summary">
+                <div class="inquiry-summary__item">
+                  <span class="inquiry-summary__label">Dates:</span>
+                  <span class="inquiry-summary__val" id="modal-summary-dates">Selected Dates</span>
+                </div>
+                <div class="inquiry-summary__item">
+                  <span class="inquiry-summary__label">Duration:</span>
+                  <span class="inquiry-summary__val" id="modal-summary-nights">0 Nights</span>
+                </div>
+                <div class="inquiry-summary__item">
+                  <span class="inquiry-summary__label">Guests:</span>
+                  <span class="inquiry-summary__val" id="modal-summary-guests">2 Adults</span>
+                </div>
+                <div class="inquiry-summary__item">
+                  <span class="inquiry-summary__label">Estimated Total:</span>
+                  <span class="inquiry-summary__val inquiry-summary__val--highlight" id="modal-summary-price">₱0</span>
+                </div>
+              </div>
+
+              <!-- Guest Contact Fields -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="guest-name" class="form-group__label">Full Name *</label>
+                  <input type="text" id="guest-name" name="guest_name" class="form-group__input" required
+                    placeholder="Elena Vance" autocomplete="name">
+                </div>
+                <div class="form-group">
+                  <label for="guest-email" class="form-group__label">Email Address *</label>
+                  <input type="email" id="guest-email" name="guest_email" class="form-group__input" required
+                    placeholder="elena@example.com" autocomplete="email">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="guest-phone" class="form-group__label">Phone Number *</label>
+                <input type="tel" id="guest-phone" name="guest_phone" class="form-group__input" required
+                  placeholder="+1 (555) 012-3456" autocomplete="tel">
+              </div>
+
+              <div class="form-group">
+                <label for="guest-notes" class="form-group__label">Special Requests / Occasion</label>
+                <textarea id="guest-notes" name="guest_notes" class="form-group__textarea" rows="2"
+                  placeholder="Anniversary, early arrival, private chef liaison..."></textarea>
+              </div>
+
+              <div class="form-group form-group--checkbox">
+                <input type="checkbox" id="policy-agree" class="form-group__checkbox" required>
+                <label for="policy-agree" class="form-group__checkbox-label">
+                  I understand this inquiry is a direct request and is subject to availability confirmation from Monte
+                  Azur concierge.
+                </label>
+              </div>
+            </div>
+
+            <!-- =========================================================================
+                 RIGHT COLUMN: PAYMENT SIMULATION & ACTION BUTTONS (BEM: .inquiry-form__col--payment)
+                 ========================================================================= -->
+            <div class="inquiry-form__col inquiry-form__col--payment">
+              <div class="payment-mock">
+                <div class="payment-mock__header">
+                  <span class="payment-mock__label">Payment Preference (Concept Demo)</span>
+                  <span class="payment-mock__badge">No Charges Made</span>
+                </div>
+
+                <div class="payment-mock__options" role="radiogroup" aria-label="Simulated Payment Preference">
+                  <!-- Option 1: Credit / Debit Card -->
+                  <label class="payment-mock__option payment-mock__option--active" id="label-method-card">
+                    <input type="radio" name="payment_method" value="credit_card" class="payment-mock__radio" checked>
+                    <div class="payment-mock__option-content">
+                      <div class="payment-mock__title-wrap">
+                        <span class="payment-mock__title">Credit / Debit Card</span>
+                        <div class="payment-mock__logos" aria-label="Mastercard and Visa accepted">
+                          <!-- Visa Logo SVG -->
+                          <svg class="payment-mock__logo payment-mock__logo--visa" viewBox="0 0 38 24" width="38" height="24" fill="none" aria-label="Visa">
+                            <rect width="38" height="24" rx="4" fill="#1434CB"/>
+                            <path d="M14.6 16.5L16.5 7.5H18.8L16.9 16.5H14.6ZM24.4 7.7C23.9 7.5 23.2 7.3 22.3 7.3C20 7.3 18.4 8.5 18.4 10.2C18.4 11.5 19.6 12.2 20.5 12.6C21.4 13 21.7 13.3 21.7 13.7C21.7 14.3 21 14.6 20.3 14.6C19.4 14.6 18.9 14.4 18.2 14.1L17.8 13.9L17.4 16.1C18.1 16.4 19.2 16.7 20.3 16.7C22.7 16.7 24.3 15.5 24.3 13.6C24.3 12.6 23.6 11.8 22.2 11.1C21.4 10.7 20.9 10.4 20.9 9.9C20.9 9.4 21.4 9.1 22.2 9.1C22.9 9.1 23.5 9.2 24 9.5L24.3 9.6L24.4 7.7ZM29 7.5H27.2C26.6 7.5 26.2 7.7 25.9 8.3L22.1 16.5H24.6L25.1 15.1H28.2L28.5 16.5H30.8L29 7.5ZM25.8 13.2L27.1 9.7L27.8 13.2H25.8ZM13.6 7.5L11.4 13.7L11.2 12.5C10.8 11.1 9.5 9.6 8.1 8.8L10.1 16.5H12.7L16.2 7.5H13.6Z" fill="#FFFFFF"/>
+                          </svg>
+                          <!-- Mastercard Logo SVG -->
+                          <svg class="payment-mock__logo payment-mock__logo--mastercard" viewBox="0 0 38 24" width="38" height="24" fill="none" aria-label="Mastercard">
+                            <rect width="38" height="24" rx="4" fill="#1A1A18"/>
+                            <circle cx="15" cy="12" r="7" fill="#EB001B"/>
+                            <circle cx="23" cy="12" r="7" fill="#F79E1B"/>
+                            <path d="M19 7.3A7 7 0 0 0 19 16.7A7 7 0 0 0 19 7.3Z" fill="#FF5F00"/>
+                          </svg>
+                        </div>
+                      </div>
+                      <span class="payment-mock__caption">Visa, Mastercard, Amex (Mock Simulation)</span>
+                    </div>
+                  </label>
+
+                  <!-- Option 2: GCash -->
+                  <label class="payment-mock__option" id="label-method-gcash">
+                    <input type="radio" name="payment_method" value="gcash" class="payment-mock__radio">
+                    <div class="payment-mock__option-content">
+                      <div class="payment-mock__title-wrap">
+                        <span class="payment-mock__title">GCash Express</span>
+                        <div class="payment-mock__logos">
+                          <span class="payment-mock__gcash-pill">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                              <rect width="20" height="20" x="2" y="2" rx="5" fill="#007DFE" stroke="#007DFE"/>
+                              <path d="M16 8h-5a3.5 3.5 0 0 0 0 7h5v-3.5h-3.5" stroke="#FFFFFF"/>
+                            </svg>
+                            <span>GCash</span>
+                          </span>
+                        </div>
+                      </div>
+                      <span class="payment-mock__caption">Philippines E-Wallet &bull; Mock Mobile Transfer</span>
+                    </div>
+                  </label>
+                </div>
+
+                <!-- Card Interactive Preview Fields -->
+                <div class="payment-mock__fields" id="mock-fields-card">
+                  <div class="form-group">
+                    <label class="form-group__label">Mock Card Number</label>
+                    <div class="payment-mock__input-wrap">
+                      <input type="text" class="form-group__input payment-mock__input" value="•••• •••• •••• 4242" readonly>
+                      <span class="payment-mock__input-tag">DEMO</span>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-group__label">Expires</label>
+                      <input type="text" class="form-group__input payment-mock__input" value="12 / 28" readonly>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-group__label">CVC</label>
+                      <input type="text" class="form-group__input payment-mock__input" value="•••" readonly>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- GCash Interactive Preview Fields -->
+                <div class="payment-mock__fields payment-mock__fields--gcash" id="mock-fields-gcash" hidden>
+                  <div class="form-group">
+                    <label class="form-group__label">Mock GCash Account Number</label>
+                    <div class="payment-mock__input-wrap">
+                      <input type="text" class="form-group__input payment-mock__input" value="+63 9•• ••• •890" readonly>
+                      <span class="payment-mock__input-tag payment-mock__input-tag--gcash">VERIFIED</span>
+                    </div>
+                  </div>
+                  <p class="payment-mock__note">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                    <span>A simulated GCash reference ID will be generated upon submission. No actual charges will be deducted.</span>
+                  </p>
+                </div>
+              </div>
+
+              <div class="form-feedback" id="form-feedback" role="alert" hidden></div>
+
+              <!-- Action buttons placed on the right column below payment preference -->
+              <div class="booking-modal__actions">
+                <button type="button" class="btn btn--secondary booking-modal__btn booking-modal__btn--cancel" id="inquiry-cancel">Cancel</button>
+                <button type="submit" class="btn btn--primary booking-modal__btn booking-modal__btn--submit" id="inquiry-submit">
+                  <span class="btn__text">Send Booking Request</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <!-- Success Message State (Shown after reservation request is sent) -->
+        <div class="inquiry-success" id="inquiry-success" hidden>
+          <div class="inquiry-success__icon" aria-hidden="true">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="12" cy="12" r="10" stroke="#8A927D" stroke-width="1.5" />
+              <path d="M8 12.5l2.5 2.5L16 9" stroke="#1A1A18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </div>
+          <h4 class="inquiry-success__title">Reservation Sent Successfully</h4>
+          <div class="inquiry-success__badge" id="success-reference-badge">
+            <span class="inquiry-success__badge-label">REFERENCE:</span>
+            <strong class="inquiry-success__badge-val" id="success-reference-id">MA-AZUR</strong>
+          </div>
+          <p class="inquiry-success__text">
+            Thank you, <strong id="success-guest-name">Guest</strong>. Your reservation request for <strong
+              id="success-dates">dates</strong> has been received by our villa concierge team. We will review
+            availability and contact you within 4 hours.
+          </p>
+          <div class="inquiry-success__details" id="success-details-card">
+            <div class="inquiry-success__detail-item">
+              <span class="inquiry-success__detail-label">Duration</span>
+              <span class="inquiry-success__detail-val" id="success-nights">0 Nights</span>
+            </div>
+            <div class="inquiry-success__detail-item">
+              <span class="inquiry-success__detail-label">Guests</span>
+              <span class="inquiry-success__detail-val" id="success-guests">2 Adults</span>
+            </div>
+            <div class="inquiry-success__detail-item inquiry-success__detail-item--full">
+              <span class="inquiry-success__detail-label">Payment Preference</span>
+              <span class="inquiry-success__detail-val" id="success-payment">Credit Card (Mock Simulation)</span>
+            </div>
+            <div class="inquiry-success__detail-item inquiry-success__detail-item--full">
+              <span class="inquiry-success__detail-label">Total Estimated</span>
+              <span class="inquiry-success__detail-val inquiry-success__detail-val--highlight" id="success-price">₱0 PHP</span>
+            </div>
+          </div>
+          <button type="button" class="btn btn--primary" id="inquiry-finish">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Single Vite ES Module Entry Point -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

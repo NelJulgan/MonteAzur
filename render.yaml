@@ -1,0 +1,47 @@
+# ============================================================================
+# MONTE AZUR STAYCATION — RENDER.COM DEPLOYMENT BLUEPRINT (render.yaml)
+# ============================================================================
+# DEVELOPMENT STAGE:
+# - STAGE 1: FOUNDATION CODE (Backend Web Service Definition)
+# - STAGE 2: CORE FUNCTIONALITY (Build, Start, Health Check & CORS Wiring)
+# - STAGE 3: ENHANCEMENT / OPTIMIZATION (Zero-Downtime Env Template)
+#
+# Why this file exists:
+# Allows one-click "Blueprint" deployment on Render.com directly from your
+# GitHub repository, automatically pointing to the `/backend` directory.
+# ============================================================================
+
+services:
+  - type: web
+    name: monte-azur-backend
+    runtime: node
+    rootDir: backend
+    plan: free
+    buildCommand: npm install --include=dev && npm run build
+    startCommand: npm run start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: FRONTEND_URL
+        sync: false
+      - key: ALLOWED_ORIGINS
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: REDIS_URL
+        sync: false
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_CHAT_ID
+        sync: false
+      - key: GOOGLE_CALENDAR_ID
+        sync: false
+      - key: GOOGLE_CLIENT_EMAIL
+        sync: false
+      - key: GOOGLE_PRIVATE_KEY
+        sync: false
+      - key: ADMIN_API_KEY
+        generateValue: true

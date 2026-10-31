@@ -1,0 +1,167 @@
+/* ==========================================================================
+   STAGE 2 & 3: CORE FUNCTIONALITY & ANIMATION STYLING
+   // STEP 3: Add CSS transitions, clip-path masks, and performance optimizations
+   Why this code exists:
+   Defines hardware-accelerated image masking, clip-path reveals, smooth state
+   transitions, and critical accessibility fallbacks for prefers-reduced-motion.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. IMAGE CLIP-PATH & REVEAL CONTAINERS
+   Tricky logic: We use a wrapper with overflow hidden + child scale counter-effect
+   so when GSAP or CSS clip-path animates, the image feels stationary or subtly
+   floating rather than distorting aspect ratio.
+   -------------------------------------------------------------------------- */
+.image-reveal {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+
+  /* Hardware acceleration trigger and anti-flicker clipping containment */
+  transform: translateZ(0);
+  isolation: isolate;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  backface-visibility: hidden;
+}
+
+.image-reveal--fade {
+  opacity: 1;
+  transition: opacity var(--duration-slow) var(--ease-cinematic);
+}
+
+.image-reveal--clip {
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   2. GSAP SCROLLTRIGGER ENTRY TARGETS
+   Elements marked with data-scroll-item start with ready states and are enhanced
+   gracefully once GSAP initializes.
+   -------------------------------------------------------------------------- */
+[data-scroll-item] {
+  will-change: transform, opacity;
+}
+
+/* --------------------------------------------------------------------------
+   STAGE 2: CORE FUNCTIONALITY & STAGE 3: ENHANCEMENT / ANIMATION
+   // STEP 2: Add the CSS layout and styling
+   // STEP 5: Optimize performance, 60fps GPU layers, and responsiveness
+   Why this code exists:
+   Forces animated and parallaxed nodes to render on dedicated GPU layers with translate3d,
+   eliminating repaint churn, paint stutter, and wheel jitter during fast scrubs.
+   Tricky logic:
+   -webkit-mask-image and isolation: isolate prevent Safari hairline clipping bugs
+   when scaling and translating images inside border-radius containers.
+   TODO: Maintain flat BEM selectors (0,1,0 specificity limit).
+   -------------------------------------------------------------------------- */
+.parallax-img,
+.hero-banner__media-wrapper,
+.hero-banner__image,
+.hero-banner__editorial-content,
+.hero-banner__scroll,
+.property-about__figure,
+.property-about__img,
+.property-about__narrative,
+.property-about__caption,
+.space-card,
+.space-card__img,
+.spaces-section__col--intro,
+.section-header,
+.reviews-trust-badge,
+.location-guide__info,
+.closing-cta__media,
+.closing-cta__image,
+.closing-cta__box,
+.residence-tour__canvas {
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   STAGE 1: FOUNDATION CODE — PARALLAX BLEED & HEADROOM
+   // STEP 1: Create the HTML structure
+   // STEP 2: Add the CSS layout and styling
+   Why this code exists:
+   Parallax requires the inner image to be significantly taller than its parent
+   container (136% height with top: -18%). This extra vertical bleed ensures
+   that as the image translates vertically (from +12% down to -12% up)
+   and scales (from 1.06 to 1.20), no blank borders appear.
+   Tricky logic:
+   Cards (.amenity-card, .experience-card, .review-card, etc.) are strictly excluded
+   from this rule per user instruction so that card media remains naturally framed
+   inside its aspect-ratio box without zoom clipping.
+   TODO: Maintain flat BEM selectors (0,1,0 specificity limit).
+   -------------------------------------------------------------------------- */
+.parallax-img,
+.property-about__img,
+.space-card__img,
+.closing-cta__image {
+  position: absolute !important;
+  top: -18% !important;
+  left: 0 !important;
+  height: 136% !important;
+  width: 100% !important;
+  margin-top: 0 !important;
+  transform-origin: center center;
+  object-fit: cover;
+  will-change: transform;
+}
+
+/* --------------------------------------------------------------------------
+   STAGE 2: CORE FUNCTIONALITY — CLEAN STATIC CARD MEDIA CONTAINMENT
+   // STEP 2: Add the CSS layout and styling
+   Why this code exists:
+   Replaces parallax bleed on .amenity-card and .experience-card with clean,
+   natural media containment ("just put inside in the image").
+   Tricky logic:
+   `position: relative !important` and `transform: none !important` override
+   any leftover GPU translations or absolute positioning, locking the image
+   perfectly within .amenity-card__media and .experience-card__media.
+   TODO: Maintain flat BEM selectors (0,1,0 specificity limit).
+   -------------------------------------------------------------------------- */
+.amenity-card__img,
+.experience-card__image {
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  transform: none !important;
+  will-change: auto !important;
+}
+
+.amenity-card,
+.experience-card,
+.review-card,
+.spec-card,
+.location-card,
+.booking-calendar-card,
+.booking-summary-card,
+.award-item,
+.awards-ribbon__grid {
+  transform: none;
+}
+
+.hero-banner__image,
+.hero-banner__image--fallback {
+  transform-origin: center center;
+  object-fit: cover;
+  will-change: transform;
+}
+
+.image-reveal,
+.space-card__media,
+.experience-card__media,
+.amenity-card__media,
+.property-about__figure,
+.closing-cta__media {
+  overflow: hidden !important;
+  isolation: isolate;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+}
