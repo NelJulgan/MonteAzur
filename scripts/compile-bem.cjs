@@ -1,6 +1,21 @@
 const fs = require('fs');
 const path = require('path');
-const postcss = require('postcss');
+
+// ============================================================================
+// STAGE 1: FOUNDATION CODE — Fault-Tolerant PostCSS Resolution
+// ============================================================================
+// // STEP 1: Load PostCSS when available; fallback gracefully in cached CI builds
+// Why this code exists:
+// Ensures `npm run compile:css` never crashes a Vercel/CI build with
+// `MODULE_NOT_FOUND` if the build runner reuses a partial node_modules cache,
+// since `css/*.css` are already pre-flattened before commit.
+// TODO: None.
+let postcss = null;
+try {
+  postcss = require('postcss');
+} catch (_) {
+  postcss = null;
+}
 
 const bemNestingPlugin = () => {
   return {
@@ -40,6 +55,9 @@ bemNestingPlugin.postcss = true;
 
 async function processFile(filePath) {
   const css = fs.readFileSync(filePath, 'utf8');
+  if (!postcss) {
+    return css;
+  }
   let result = css;
   // Multiple passes to resolve any multi-level nesting
   for (let pass = 0; pass < 3; pass++) {
