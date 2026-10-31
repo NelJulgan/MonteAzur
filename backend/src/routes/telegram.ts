@@ -99,7 +99,7 @@ export async function processTelegramMessage(message: any): Promise<void> {
   if (!isAuthorized) {
     console.warn(`⚠️ [Telegram] Message from unauthorized chat: ${chatId} (from: ${fromId})`);
     await sendTelegramMessage(
-      '🚫 *Unauthorized:* This Telegram bot is restricted to Monte Azur estate management.',
+      `🚫 *Unauthorized:* This Telegram bot is restricted to Monte Azur estate management.\n\nYour Telegram Chat ID is: \`${chatId}\`\n(User ID: \`${fromId}\`)\n\nAdd this ID to \`ALLOWED_CHAT_IDS\` in your server environment settings to authorize access.`,
       'Markdown',
       chatId
     );
@@ -108,8 +108,15 @@ export async function processTelegramMessage(message: any): Promise<void> {
 
   console.log(`🤖 [Telegram Command] From ${senderName} (${chatId}): "${userText}"`);
 
-  // COMMAND 1: /block YYYY-MM-DD to YYYY-MM-DD Reason
-  const blockMatch = userText.match(BLOCK_COMMAND_REGEX);
+  // Normalize command for flexible matching (handles /status, status, /status@bot, Status, HELP, etc.)
+  const cleanText = userText.replace(/^@\w+\s*/, '').trim();
+  const baseCmd = (cleanText.startsWith('/') ? cleanText.substring(1) : cleanText)
+    .split('@')[0]
+    .trim()
+    .toLowerCase();
+
+  // COMMAND 1: /block YYYY-MM-DD to YYYY-MM-DD Reason (also supports "block ...")
+  const blockMatch = userText.match(BLOCK_COMMAND_REGEX) || userText.match(/^block\s+(\d{4}-\d{2}-\d{2})\s+to\s+(\d{4}-\d{2}-\d{2})(?:\s+(.+))?$/i);
   if (blockMatch) {
     const checkIn = blockMatch[1];
     const checkOut = blockMatch[2];
@@ -247,8 +254,8 @@ export async function processTelegramMessage(message: any): Promise<void> {
     return;
   }
 
-  // COMMAND 2: /help or /start
-  if (userText.startsWith('/help') || userText.startsWith('/start')) {
+  // COMMAND 2: /help or /start or "help" or "start"
+  if (baseCmd === 'help' || baseCmd === 'start' || userText.startsWith('/help') || userText.startsWith('/start')) {
     const helpMessage = `
 🛠️ *MONTE AZUR MANAGEMENT COMMANDS*
 
@@ -263,8 +270,8 @@ export async function processTelegramMessage(message: any): Promise<void> {
     return;
   }
 
-  // COMMAND 3: /unblock YYYY-MM-DD to YYYY-MM-DD
-  const unblockMatch = userText.match(UNBLOCK_COMMAND_REGEX);
+  // COMMAND 3: /unblock YYYY-MM-DD to YYYY-MM-DD (also supports "unblock ...")
+  const unblockMatch = userText.match(UNBLOCK_COMMAND_REGEX) || userText.match(/^unblock\s+(\d{4}-\d{2}-\d{2})\s+to\s+(\d{4}-\d{2}-\d{2})$/i);
   if (unblockMatch) {
     const checkIn = unblockMatch[1];
     const checkOut = unblockMatch[2];
@@ -325,9 +332,9 @@ export async function processTelegramMessage(message: any): Promise<void> {
     return;
   }
 
-  // COMMAND 4: /occupancy [Month] [Year]
-  const occMatch = userText.match(OCCUPANCY_COMMAND_REGEX);
-  if (occMatch || userText.startsWith('/occupancy')) {
+  // COMMAND 4: /occupancy [Month] [Year] (also supports "occupancy ...")
+  const occMatch = userText.match(OCCUPANCY_COMMAND_REGEX) || userText.match(/^occupancy(?:\s+([a-zA-Z]+|\d{1,2}))?(?:\s+(\d{4}))?$/i);
+  if (occMatch || baseCmd.startsWith('occupancy') || userText.startsWith('/occupancy')) {
     const now = new Date();
     let targetYear = now.getUTCFullYear();
     let targetMonth = now.getUTCMonth() + 1;
@@ -403,15 +410,15 @@ export async function processTelegramMessage(message: any): Promise<void> {
     return;
   }
 
-  // COMMAND 5: /briefing — Triggers instant daily morning briefing
-  if (userText.startsWith('/briefing')) {
+  // COMMAND 5: /briefing or "briefing"
+  if (baseCmd === 'briefing' || userText.startsWith('/briefing')) {
     await sendTelegramMessage('⏳ Generating Monte Azur estate briefing report...', 'Markdown', chatId);
     await sendDailyBriefingOnce();
     return;
   }
 
-  // COMMAND 6: /status — Quick occupancy audit
-  if (userText.startsWith('/status')) {
+  // COMMAND 6: /status or "status"
+  if (baseCmd === 'status' || userText.startsWith('/status')) {
     let confirmedCount = 0;
     let maintenanceCount = 0;
 
@@ -538,6 +545,15 @@ export async function startTelegramPolling(): Promise<void> {
                   await processTelegramMessage(msg);
                 }
               }
+            }
+          } else {
+            const errData = (await res.json().catch(() => ({}))) as any;
+            if (res.status === 409) {
+              console.warn('⚠️ [Telegram Polling] 409 Conflict: Another instance is polling getUpdates. Backing off 8s...');
+              await new Promise((r) => setTimeout(r, 8000));
+            } else {
+              console.warn(`⚠️ [Telegram Polling] HTTP ${res.status}: ${errData?.description || 'Update fetch error'}`);
+              await new Promise((r) => setTimeout(r, 3000));
             }
           }
         } catch (pollErr: any) {
